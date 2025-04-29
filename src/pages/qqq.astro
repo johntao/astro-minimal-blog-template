@@ -1,11 +1,9 @@
 ---
-
 import type { CartItemDisplayInfo } from '../cartStore';
 import Layout from '../layouts/Layout.astro';
 import AddToCartForm from '../components/AddToCartForm';
 import FigurineDescription from '../components/FigurineDescription.astro';
 import { withBase } from '../utils';
-import Button from '../components/Button.astro';
 
 const item: CartItemDisplayInfo = {
 	id: 'astronaut-figurine',
@@ -16,10 +14,7 @@ const item: CartItemDisplayInfo = {
 
 <Layout title={item.name}>
 	<main>
-		<div class="grid place-items-center h-screen content-center">
-			<Button>Tailwind Button in Astro!</Button>
-			<a href="/markdown-page" class="p-4 underline">Markdown is also supported...</a>
-		</div>
+		<h1>qqq</h1>
 		<div class="product-layout">
 			<div>
 				<FigurineDescription />
