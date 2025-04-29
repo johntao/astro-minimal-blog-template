@@ -25,11 +25,14 @@ const { title } = Astro.props;
 				<a href={withBase('/')} class="nav-header">
 					<span style="color: var(--astro-blue)">Astro</span> storefront
 				</a>
+				<a href={withBase('/qqq')} class="nav-header">
+					<span style="color: var(--astro-blue)">qqq</span>
+				</a>
 				<CartFlyoutToggle client:load />
 			</nav>
 		</header>
 		<slot />
-		<CartFlyout client:load />
+		<CartFlyout client:only="preact" />
 	</body>
 </html>
 
