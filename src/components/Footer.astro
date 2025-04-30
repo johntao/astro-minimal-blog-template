@@ -1,0 +1,29 @@
+---
+// Footer component (shared across pages)
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <div class="footer-container">
+    <p>&copy; {currentYear} My Astro Blog. All rights reserved.</p>
+    <p>Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a></p>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding: 1rem 0;
+    border-top: 1px solid #eaeaea;
+    margin-top: 2rem;
+  }
+
+  .footer-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  a {
+    color: #333;
+  }
+</style>

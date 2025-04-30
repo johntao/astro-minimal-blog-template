@@ -1,0 +1,65 @@
+---
+// Home component for the index page center section
+import { getCollection } from "astro:content";
+
+const allPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<div class="home-container">
+  <h2>Latest Blog Posts</h2>
+
+  <ul class="posts-list">
+    {allPosts.map((post) => (
+      <li class="post-item">
+        <h3>
+          <a href={`/posts/${post.id}`}>
+            {post.data.title || 'Untitled Post'}
+          </a>
+        </h3>
+        {post.data.pubDate &&
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString()}
+          </time>
+        }
+        {post.data.description &&
+          <p class="description">{post.data.description}</p>
+        }
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .home-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 0;
+  }
+
+  .posts-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .post-item {
+    margin-bottom: 2rem;
+  }
+
+  time {
+    color: #666;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>

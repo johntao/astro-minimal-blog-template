@@ -1,0 +1,39 @@
+---
+// Header component (shared across pages)
+---
+
+<header>
+  <div class="header-container">
+    <h1>My Astro Blog</h1>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    padding: 1rem 0;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .header-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    gap: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+</style>

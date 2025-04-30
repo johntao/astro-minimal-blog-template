@@ -1,9 +1,7 @@
 ---
-import { getCollection } from "astro:content";
-
-const allPosts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Home from '../components/Home.astro';
 ---
 
 <html lang="en">
@@ -15,19 +13,31 @@ const allPosts = (await getCollection('blog')).sort(
 		<title>My Astro Blog</title>
 	</head>
 	<body>
-		<h1>My Astro Blog</h1>
-		<p>Welcome to my blog built with Astro</p>
+		<!-- Top Section: Header Component -->
+		<section id="top">
+			<Header />
+		</section>
 
-		<h2>All Posts</h2>
-		<ul>
-			{allPosts.map((post) => (
-				<li>
-					<a href={post.filePath}>
-						{post.data.title || 'Untitled Post'}
-					</a>
-					{post.data.description && <p>{post.data.description}</p>}
-				</li>
-			))}
-		</ul>
+		<!-- Center Section: Home Component -->
+		<section id="center">
+			<Home />
+		</section>
+
+		<!-- Bottom Section: Footer Component -->
+		<section id="bottom">
+			<Footer />
+		</section>
 	</body>
 </html>
+
+<style>
+	body {
+		margin: 0;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+			'Open Sans', 'Helvetica Neue', sans-serif;
+	}
+
+	section {
+		width: 100%;
+	}
+</style>
