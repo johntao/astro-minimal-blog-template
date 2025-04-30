@@ -1,18 +1,53 @@
 ---
 // Header component (shared across pages)
+import { withBase } from '@/utils';
 ---
 
 <header>
   <div class="header-container">
-    <h1>My Astro Blog</h1>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-      </ul>
-    </nav>
+    <div class="logo-nav">
+      <h1><a href="/">My Astro Blog</a></h1>
+    </div>
+
+    <div class="header-tools">
+      <!-- Social Links -->
+      <div class="social-links">
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" title="GitHub">
+          GitHub
+        </a>
+        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" title="Twitter">
+          Twitter
+        </a>
+      </div>
+
+      <!-- Search Form -->
+      <div class="search-container">
+        <form id="search-form" action="/search" method="GET">
+          <input type="text" name="q" placeholder="Search..." aria-label="Search" />
+          <button type="submit" aria-label="Submit search">Search</button>
+        </form>
+      </div>
+    </div>
   </div>
 </header>
+
+<script>
+  // Client-side search functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.getElementById('search-form');
+
+    searchForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(searchForm as HTMLFormElement);
+      const searchQuery = formData.get('q');
+
+      if (searchQuery) {
+        // For now, we'll just redirect to a search page with the query
+        window.location.href = `/search?q=${encodeURIComponent(searchQuery as string)}`;
+      }
+    });
+  });
+</script>
 
 <style>
   header {
@@ -25,15 +60,52 @@
     margin: 0 auto;
   }
 
-  nav ul {
+  .logo-nav {
     display: flex;
-    list-style: none;
-    padding: 0;
-    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
   }
 
   a {
     text-decoration: none;
     color: #333;
+  }
+
+  .header-tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .search-container {
+    display: flex;
+  }
+
+  #search-form {
+    display: flex;
+  }
+
+  #search-form input[type="text"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  #search-form button {
+    padding: 0.5rem;
+    background-color: #0070f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #search-form button:hover {
+    background-color: #005bb5;
   }
 </style>

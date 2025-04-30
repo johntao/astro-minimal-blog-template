@@ -5,8 +5,33 @@ const currentYear = new Date().getFullYear();
 
 <footer>
   <div class="footer-container">
-    <p>&copy; {currentYear} My Astro Blog. All rights reserved.</p>
-    <p>Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a></p>
+    <div class="footer-primary">
+      <div class="copyright">
+        <p>&copy; {currentYear} My Astro Blog</p>
+        <p class="license">
+          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">
+            CC BY-NC 4.0
+          </a>
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="/rss.xml" class="rss-link">
+          RSS Feed
+        </a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+
+    <div class="footer-secondary">
+      <p class="powered-by">
+        Powered by
+        <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>
+      </p>
+      <p class="made-by">
+        Made with ❤️ by <a href="https://github.com/yourusername" target="_blank" rel="noopener">Your Name</a>
+      </p>
+    </div>
   </div>
 </footer>
 

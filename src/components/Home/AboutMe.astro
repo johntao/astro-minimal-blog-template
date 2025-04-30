@@ -1,0 +1,55 @@
+---
+// AboutMe component with toggle functionality
+---
+
+<div class="about-me-container">
+  <div class="about-me-header">
+    <h2>About Me</h2>
+    <button id="toggle-about-me" aria-label="Toggle about me section">
+      <span class="toggle-text">Hide</span>
+    </button>
+  </div>
+
+  <div id="about-me-content" class="about-me-content">
+    <p>Hello! I'm a passionate blogger and developer who loves to share insights about technology, programming, and web development.</p>
+    <p>This blog is my platform to document my journey, share what I've learned, and hopefully help others along the way.</p>
+    <div class="about-me-links">
+      <a href="/about">Read more about me →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Toggle functionality for About Me section
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggle-about-me');
+    const content = document.getElementById('about-me-content');
+    const toggleText = toggleBtn?.querySelector('.toggle-text');
+
+    // Check if the about me section should be hidden (from localStorage)
+    const isHidden = localStorage.getItem('aboutMeHidden') === 'true';
+
+    // Initialize state based on localStorage
+    if (isHidden && content) {
+      content.style.display = 'none';
+      if (toggleText) toggleText.textContent = 'Show';
+    }
+
+    toggleBtn?.addEventListener('click', () => {
+      if (content) {
+        const isCurrentlyVisible = content.style.display !== 'none';
+
+        // Toggle visibility
+        content.style.display = isCurrentlyVisible ? 'none' : 'block';
+
+        // Update button text
+        if (toggleText) {
+          toggleText.textContent = isCurrentlyVisible ? 'Show' : 'Hide';
+        }
+
+        // Store preference in localStorage
+        localStorage.setItem('aboutMeHidden', isCurrentlyVisible.toString());
+      }
+    });
+  });
+</script>

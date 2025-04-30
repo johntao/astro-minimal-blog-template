@@ -1,0 +1,24 @@
+---
+// MainContent component for the post detail center section
+const { post, Content } = Astro.props;
+---
+
+<article class="post-main-content">
+  <h1>{post.data.title}</h1>
+
+  <div class="post-meta">
+    {post.data.pubDate &&
+      <time datetime={post.data.pubDate.toISOString()}>
+        {post.data.pubDate.toLocaleDateString()}
+      </time>
+    }
+  </div>
+
+  {post.data.description &&
+    <p class="post-description">{post.data.description}</p>
+  }
+
+  <div class="post-content">
+    <Content />
+  </div>
+</article>

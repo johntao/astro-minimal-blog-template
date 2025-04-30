@@ -1,70 +1,26 @@
 ---
-// PostDetail component for the post page center section
+// PostDetail component for the post page
 import { render } from "astro:content";
+import TOC from './TOC.astro';
+import MainContent from './MainContent.astro';
+
 const { post } = Astro.props;
-const { Content } = await render(post);
+// const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 ---
 
-<article class="post-container">
-  <h1>{post.data.title}</h1>
+<div class="post-detail-container">
+  <!-- Left Section: TOC -->
+  <section id="left">
+    <TOC headings={headings} />
+  </section>
 
-  {post.data.pubDate &&
-    <time datetime={post.data.pubDate.toISOString()}>
-      {post.data.pubDate.toLocaleDateString()}
-    </time>
-  }
-
-  {post.data.description &&
-    <p class="description">{post.data.description}</p>
-  }
-
-  <div class="content">
-    <Content />
-  </div>
+  <!-- Center Section: MainContent -->
+  <section id="center">
+    <MainContent post={post} Content={Content} />
+  </section>
 
   <div class="back-link">
     <a href="/">← Back to Home</a>
   </div>
-</article>
-
-<style>
-  .post-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 1rem 0;
-  }
-
-  h1 {
-    margin-bottom: 0.5rem;
-  }
-
-  time {
-    color: #666;
-    font-size: 0.9rem;
-    display: block;
-    margin-bottom: 1rem;
-  }
-
-  .description {
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-
-  .content {
-    margin: 2rem 0;
-    line-height: 1.6;
-  }
-
-  .back-link {
-    margin-top: 2rem;
-  }
-
-  a {
-    color: #333;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-</style>
+</div>

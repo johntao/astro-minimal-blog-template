@@ -1,0 +1,31 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+// TOC (Table of Contents) component for the post detail left section
+// This component will extract headings from the post content and display them as a table of contents
+const { headings } = Astro.props;
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+---
+
+<div class="toc-container">
+  <h2>Table of Contents</h2>
+
+  {headings && headings.length > 0 ? (
+    <nav class="toc-nav">
+      <ul>
+        {headings.map((heading) => (
+          <li class={`toc-item level-${heading.depth}`}>
+            <a href={`#${heading.slug}`}>
+              {heading.text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  ) : (
+    <p>No table of contents available for this post.</p>
+  )}
+</div>
