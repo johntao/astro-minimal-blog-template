@@ -3,22 +3,22 @@
 const { post, Content } = Astro.props;
 ---
 
-<article class="post-main-content">
-  <h1>{post.data.title}</h1>
+<article class="prose lg:prose-lg max-w-none">
+  <h1 class="text-3xl font-bold mb-4">{post.data.title}</h1>
 
-  <div class="post-meta">
+  <div class="text-gray-500 mb-6">
     {post.data.pubDate &&
-      <time datetime={post.data.pubDate.toISOString()}>
+      <time datetime={post.data.pubDate.toISOString()} class="text-sm">
         {post.data.pubDate.toLocaleDateString()}
       </time>
     }
   </div>
 
   {post.data.description &&
-    <p class="post-description">{post.data.description}</p>
+    <p class="text-lg text-gray-700 mb-8 italic">{post.data.description}</p>
   }
 
-  <div class="post-content">
+  <div class="mt-6">
     <Content />
   </div>
 </article>

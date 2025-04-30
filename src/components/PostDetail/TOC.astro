@@ -10,15 +10,18 @@ interface Props {
 
 ---
 
-<div class="toc-container">
-  <h2>Table of Contents</h2>
+<div class="sticky top-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+  <h2 class="text-xl font-semibold mb-4">Table of Contents</h2>
 
   {headings && headings.length > 0 ? (
-    <nav class="toc-nav">
-      <ul>
+    <nav>
+      <ul class="space-y-2">
         {headings.map((heading) => (
-          <li class={`toc-item level-${heading.depth}`}>
-            <a href={`#${heading.slug}`}>
+          <li class={`level-${heading.depth} ${heading.depth === 2 ? 'font-medium' : 'text-sm pl-3'}`}>
+            <a 
+              href={`#${heading.slug}`}
+              class="hover:text-primary block text-gray-700"
+            >
               {heading.text}
             </a>
           </li>
@@ -26,6 +29,6 @@ interface Props {
       </ul>
     </nav>
   ) : (
-    <p>No table of contents available for this post.</p>
+    <p class="text-gray-500 italic">No table of contents available for this post.</p>
   )}
 </div>
