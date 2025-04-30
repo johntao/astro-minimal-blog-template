@@ -1,10 +1,10 @@
 ---
 // Home component for the index page center section
-import AboutMe from './AboutMe.astro';
+import { AboutMe } from './AboutMe';
 import PostList from './PostList.astro';
 ---
 
 <div class="max-w-container mx-auto px-4 py-6 space-y-10">
-  <AboutMe />
+  <AboutMe client:only="preact" />
   <PostList />
 </div>
