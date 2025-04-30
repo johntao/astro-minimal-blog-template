@@ -5,6 +5,11 @@
   "compilerOptions": {
     // Preact specific settings
     "jsx": "react-jsx",
-    "jsxImportSource": "preact"
+    "jsxImportSource": "preact",
+    // Path aliases for absolute imports
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   }
 }
