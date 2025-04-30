@@ -3,10 +3,6 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
-      colors: {
-        primary: '#0070f3',
-        secondary: '#005bb5',
-      },
       maxWidth: {
         'container': '800px',
       },

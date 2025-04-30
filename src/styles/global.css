@@ -13,3 +13,8 @@
     @apply font-medium;
   }
 }
+
+@theme {
+  --color-primary: #0070f3;
+  --color-secondary: #005bb5;
+}
