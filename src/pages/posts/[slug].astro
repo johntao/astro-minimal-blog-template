@@ -1,18 +1,5 @@
 ---
-// import type { MarkdownInstance } from 'astro';
 import { getCollection, render, type CollectionEntry } from "astro:content";
-
-// export async function getStaticPaths() {
-//   const posts: MarkdownInstance<Record<string, any>>[] = await Astro.glob('./*.md');
-//   return posts.map(post => {
-//     const resName = post.url || post.file;
-//     const slug = resName.split('/').pop()?.replace(/\.md$/, '');
-//     return {
-//       params: { slug },
-//       props: { post },
-//     };
-//   });
-// }
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
@@ -24,7 +11,6 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-// const { Content } = await post.default(Astro.props, {}, {});
 const { Content } = await render(post);
 ---
 

@@ -1,8 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 
-// Get all posts from the src/pages/posts directory
-// const allPosts = await Astro.glob('./posts/*.md');
 const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
@@ -24,7 +22,6 @@ const allPosts = (await getCollection('blog')).sort(
 		<ul>
 			{allPosts.map((post) => (
 				<li>
-					{/* <a href={`/posts/${post.url.split('/').pop().replace(/\.md$/, '')}`}> */}
 					<a href={post.filePath}>
 						{post.data.title || 'Untitled Post'}
 					</a>
