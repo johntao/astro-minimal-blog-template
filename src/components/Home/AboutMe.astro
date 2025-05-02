@@ -1,0 +1,32 @@
+---
+
+---
+
+<script>
+  import Alpine from 'alpinejs';
+  import persist from '@alpinejs/persist';
+  Alpine.plugin(persist);
+</script>
+
+<div
+  class="bg-white rounded-lg shadow-sm p-6"
+  x-data="{ isVisible: $persist(true) }"
+>
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-semibold">About Me</h2>
+    <button
+      @click="isVisible = !isVisible"
+      aria-label="Toggle about me section"
+      class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+    >
+      <span class="toggle-text" x-text="isVisible ? 'Hide' : 'Show'"></span>
+    </button>
+  </div>
+  <div
+    class="prose"
+    x-show="isVisible"
+  >
+    <p>Hello! I'm a passionate blogger and developer who loves to share insights about technology, programming, and web development.</p>
+    <p>This blog is my platform to document my journey, share what I've learned, and hopefully help others along the way.</p>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 ---
-import ViewCounter from "./ViewCounter";
+import ViewCounter from "./ViewCounter.astro";
 
 // MainContent component for the post detail center section
 const { post, Content } = Astro.props;
@@ -8,7 +8,7 @@ const slug = Astro.params.slug || post.id;
 
 <article class="prose lg:prose-lg max-w-none">
   <h1 class="text-3xl font-bold mb-4">{post.data.title}</h1>
-  <ViewCounter slug={slug} client:only />
+  <ViewCounter slug={slug} />
   <div class="text-gray-500 mb-6">
     {post.data.pubDate &&
       <time datetime={post.data.pubDate.toISOString()} class="text-sm">

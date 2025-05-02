@@ -1,7 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
-import preact from '@astrojs/preact';
 import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -13,6 +12,8 @@ import pagefind from "astro-pagefind";
 import d2 from 'astro-d2';
 
 import db from '@astrojs/db';
+
+import alpinejs from '@astrojs/alpinejs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -31,7 +32,7 @@ export default defineConfig({
         remarkRehype: { footnoteLabel: 'Footnotes' },
         gfm: true,
     },
-    integrations: [mdx(), preact(), d2(), pagefind(), db()],
+    integrations: [mdx(), d2(), pagefind(), db(), alpinejs()],
     vite: {
         plugins: [tailwindcss()],
         resolve: {
