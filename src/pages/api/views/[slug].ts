@@ -1,16 +1,17 @@
+// filepath: /Users/taozongyou/Desktop/flex/astro-study/src/pages/api/views/[slug].ts
 import type { APIRoute } from "astro";
 import { db, ViewCount, sql, eq } from "astro:db";
 
 export const prerender = false;
 
-export const GET: APIRoute = async ({ request }) => {
-  const url = new URL(request.url);
-  const params = new URLSearchParams(url.search);
-
-  const slug = params.get("slug");
+export const GET: APIRoute = async ({ params }) => {
+  const slug = params.slug;
 
   if (!slug) {
-    return new Response("Not found", { status: 404 });
+    return new Response(
+      JSON.stringify({ error: "Slug is required" }),
+      { status: 400, headers: { "content-type": "application/json" } }
+    );
   }
 
   let item;

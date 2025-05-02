@@ -19,7 +19,7 @@ export default function ViewCounter({ slug }: ViewCounterProps) {
     const fetchViews = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`/api/views?${new URLSearchParams({ slug })}`);
+        const response = await fetch(`/api/views/${encodeURIComponent(slug)}`);
 
         if (!response.ok) {
           throw new Error(`Failed to fetch view count: ${response.statusText}`);
