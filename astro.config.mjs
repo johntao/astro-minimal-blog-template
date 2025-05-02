@@ -9,13 +9,16 @@ import path from 'path';
 // import rehypePresetMinify from 'rehype-preset-minify';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-
+import pagefind from "astro-pagefind";
 import d2 from 'astro-d2';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
+    build: {
+        format: 'file',
+    },
     markdown: {
         syntaxHighlight: 'shiki',
         shikiConfig: { theme: 'dark-plus' },
@@ -25,7 +28,7 @@ export default defineConfig({
         remarkRehype: { footnoteLabel: 'Footnotes' },
         gfm: true,
     },
-    integrations: [mdx(), preact(), d2()],
+    integrations: [mdx(), preact(), d2(), pagefind()],
     vite: {
         plugins: [tailwindcss()],
         resolve: {

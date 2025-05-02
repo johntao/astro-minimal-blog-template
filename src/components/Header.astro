@@ -1,6 +1,6 @@
 ---
 // Header component (shared across pages)
-import { withBase } from '@/utils';
+import Search from "astro-pagefind/components/Search";
 ---
 
 <header class="py-4 border-b border-gray-200">
@@ -22,18 +22,19 @@ import { withBase } from '@/utils';
         </div>
 
         <!-- Search Form -->
-        <div class="flex">
+        <Search id="search" className="pagefind-ui" uiOptions={{ showImages: false }} />
+        <!-- <div class="flex">
           <form id="search-form" action="/search" method="GET" class="flex">
             <input type="text" name="q" placeholder="Search..." aria-label="Search" class="py-2 px-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary" />
             <button type="submit" aria-label="Submit search" class="py-2 px-3 bg-primary text-white border-none rounded-r-md cursor-pointer hover:bg-secondary">Search</button>
           </form>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </header>
 
-<script>
+<!-- <script>
   // Client-side search functionality
   document.addEventListener('DOMContentLoaded', () => {
     const searchForm = document.getElementById('search-form');
@@ -49,4 +50,4 @@ import { withBase } from '@/utils';
       }
     });
   });
-</script>
+</script> -->
