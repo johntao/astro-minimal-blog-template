@@ -18,19 +18,21 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
+	<body class="bg-gray-50 min-h-screen flex flex-col">
 		<!-- Top Section: Header Component -->
 		<section id="top" class="w-full">
 			<Header />
 		</section>
 
 		<!-- Center Section: Page-specific Content -->
-		<section id="center" class="w-full">
-			<slot />
+		<section id="center" class="w-full flex-1">
+			<div class="max-w-[900px] mx-auto px-4 py-6">
+				<slot />
+			</div>
 		</section>
 
 		<!-- Bottom Section: Footer Component -->
-		<section id="bottom" class="w-full">
+		<section id="bottom" class="w-full mt-auto">
 			<Footer />
 		</section>
 	</body>

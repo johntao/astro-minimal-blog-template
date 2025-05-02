@@ -3,34 +3,21 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="py-4 border-t border-gray-200 mt-8">
-  <div class="max-w-container mx-auto px-4 text-center">
-    <div class="mb-4">
-      <div class="mb-2">
-        <p class="mb-1">&copy; {currentYear} My Astro Blog</p>
-        <p class="text-sm">
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-primary">
-            CC BY-NC 4.0
-          </a>
-        </p>
-      </div>
-
-      <div class="flex justify-center gap-4 mt-2">
-        <a href="/rss.xml" class="text-gray-600 hover:text-primary">
-          RSS Feed
-        </a>
-        <a href="/sitemap.xml" class="text-gray-600 hover:text-primary">Sitemap</a>
-      </div>
+<footer class="h-16 border-t border-gray-200 bg-white">
+  <div class="max-w-[900px] h-full mx-auto px-4 flex items-center justify-between">
+    <div class="text-sm text-gray-600">
+      &copy; {currentYear} My Astro Blog · 
+      <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-primary">
+        CC BY-NC 4.0
+      </a>
     </div>
-
-    <div class="text-sm text-gray-500">
-      <p class="mb-1">
-        Powered by
-        <a href="https://astro.build" target="_blank" rel="noopener" class="text-gray-600 hover:text-primary">Astro</a>
-      </p>
-      <p>
-        Made with ❤️ by <a href="https://github.com/yourusername" target="_blank" rel="noopener" class="text-gray-600 hover:text-primary">Your Name</a>
-      </p>
+    
+    <div class="flex items-center gap-4 text-sm">
+      <a href="/rss.xml" class="text-gray-600 hover:text-primary">RSS</a>
+      <a href="/sitemap.xml" class="text-gray-600 hover:text-primary">Sitemap</a>
+      <a href="https://astro.build" target="_blank" rel="noopener" class="text-gray-600 hover:text-primary">
+        Powered by Astro
+      </a>
     </div>
   </div>
 </footer>
