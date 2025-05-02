@@ -1,9 +1,9 @@
 import type { APIRoute } from "astro";
 import { db, ViewCount, sql, eq } from "astro:db";
 
+export const prerender = false;
+
 export const GET: APIRoute = async ({ request }) => {
-  console.log(request.url);
-  console.log(await request.text())
   const url = new URL(request.url);
   const params = new URLSearchParams(url.search);
 

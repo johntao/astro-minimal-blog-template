@@ -21,6 +21,7 @@ export default defineConfig({
     build: {
         format: 'file',
     },
+    output: "static",
     markdown: {
         syntaxHighlight: 'shiki',
         shikiConfig: { theme: 'dark-plus' },
