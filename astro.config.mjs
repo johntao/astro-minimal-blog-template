@@ -12,6 +12,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import pagefind from "astro-pagefind";
 import d2 from 'astro-d2';
 
+import db from '@astrojs/db';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
@@ -28,7 +30,7 @@ export default defineConfig({
         remarkRehype: { footnoteLabel: 'Footnotes' },
         gfm: true,
     },
-    integrations: [mdx(), preact(), d2(), pagefind()],
+    integrations: [mdx(), preact(), d2(), pagefind(), db()],
     vite: {
         plugins: [tailwindcss()],
         resolve: {
