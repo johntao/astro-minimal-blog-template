@@ -1,23 +1,24 @@
 ---
 // Header component (shared across pages)
 import Search from "astro-pagefind/components/Search";
+import Link from "./Link.astro";
 ---
 
 <header>
   <div>
-    <div class="logo-nav">
-      <h1><a href="/">My Astro Blog</a></h1>
+    <div>
+      <h1><Link href="/">My Astro Blog</Link></h1>
     </div>
 
     <div>
       <!-- Social Links -->
       <div>
-        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <Link href="https://github.com/yourusername" external title="GitHub">
           GitHub
-        </a>
-        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" title="Twitter">
+        </Link>
+        <Link href="https://twitter.com/yourusername" external title="Twitter">
           Twitter
-        </a>
+        </Link>
       </div>
 
       <!-- Search Form -->

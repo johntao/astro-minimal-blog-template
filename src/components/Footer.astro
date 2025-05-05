@@ -1,5 +1,6 @@
 ---
 // Footer component (shared across pages)
+import Link from './Link.astro';
 const currentYear = new Date().getFullYear();
 ---
 
@@ -7,17 +8,17 @@ const currentYear = new Date().getFullYear();
   <div>
     <div>
       &copy; {currentYear} My Astro Blog · 
-      <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener noreferrer">
+      <Link href="https://creativecommons.org/licenses/by-nc/4.0/" external>
         CC BY-NC 4.0
-      </a>
+      </Link>
     </div>
     
     <div>
-      <a href="/rss.xml">RSS</a>
-      <a href="/sitemap.xml">Sitemap</a>
-      <a href="https://astro.build" target="_blank" rel="noopener">
+      <Link href="/rss.xml">RSS</Link>
+      <Link href="/sitemap.xml">Sitemap</Link>
+      <Link href="https://astro.build" external>
         Powered by Astro
-      </a>
+      </Link>
     </div>
   </div>
 </footer>

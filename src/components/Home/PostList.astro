@@ -1,6 +1,7 @@
 ---
 // PostList component for displaying posts with view count, date, and title
 import { getCollection } from "astro:content";
+import Link from "../Link.astro";
 // import ViewCounterRead from "./ViewCounterRead.astro";
 
 const allPosts = (await getCollection('blog')).sort(
@@ -20,9 +21,9 @@ const allPosts = (await getCollection('blog')).sort(
           </time>
         </div>
         <h3>
-          <a href={`/posts/${post.id}`}>
+          <Link href={`/posts/${post.id}`}>
             {post.data.title || 'Untitled Post'}
-          </a>
+          </Link>
         </h3>
         {post.data.description &&
           <p>{post.data.description}</p>
