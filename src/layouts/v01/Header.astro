@@ -5,13 +5,23 @@ import Link from "@/components/Link.astro";
 ---
 
 <header class="bar">
-  <div>
+  <div class="header-container">
     <!-- Logo/Title Section -->
-    <div>
+    <div class="logo-section">
       <h1 class="text-xl font-medium"><Link href="/">My Astro Blog</Link></h1>
     </div>
 
-    <!-- Right Section: Social Links and Search -->
+    <!-- Center Section: Search Icon -->
+    <div class="search-icon-container">
+      <button id="search-button" aria-label="Open search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Right Section: Social Links -->
     <div class="flex items-center gap-6">
       <!-- Social Links -->
       <div>
@@ -22,11 +32,141 @@ import Link from "@/components/Link.astro";
           Twitter
         </Link>
       </div>
+    </div>
+  </div>
 
-      <!-- Search Form -->
-      <div>
+  <!-- Search Modal Dialog -->
+  <dialog id="search-modal" class="search-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Search</h2>
+        <button id="close-modal" aria-label="Close search">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
         <Search id="search" uiOptions={{ showImages: false }} />
       </div>
     </div>
-  </div>
+  </dialog>
 </header>
+
+<style>
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .logo-section, .search-icon-container {
+    flex: 1;
+  }
+
+  .search-icon-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  #search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+
+  #search-button:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .search-modal {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .search-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  #close-modal {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+
+  #close-modal:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+</style>
+
+<script>
+  // Initialize the modal functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchButton = document.getElementById('search-button');
+    const searchModal = document.getElementById('search-modal') as HTMLDialogElement;
+    const closeModal = document.getElementById('close-modal');
+
+    if (searchButton && searchModal && closeModal) {
+      // Open modal when search button is clicked
+      searchButton.addEventListener('click', () => {
+        searchModal.showModal();
+      });
+
+      // Close modal when close button is clicked
+      closeModal.addEventListener('click', () => {
+        searchModal.close();
+      });
+
+      // Close modal when clicking outside of it
+      searchModal.addEventListener('click', (event) => {
+        const modalContent = searchModal.querySelector('.modal-content');
+        if (modalContent && event.target instanceof Node && 
+            event.target === searchModal && !modalContent.contains(event.target)) {
+          searchModal.close();
+        }
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && searchModal.open) {
+          searchModal.close();
+        }
+      });
+    }
+  });
+</script>
