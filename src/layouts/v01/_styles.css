@@ -24,3 +24,7 @@
 
 @custom-variant headr (&:where(header.bar));
 @custom-variant footr (&:where(footer.bar));
+
+[x-cloak] {
+  display: none !important;
+}

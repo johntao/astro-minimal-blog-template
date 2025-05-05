@@ -4,71 +4,51 @@ import Search from "astro-pagefind/components/Search";
 const className = {
   button: 'bg-transparent border-none cursor-pointer p-2 rounded-full flex items-center justify-center transition-colors hover:bg-black/5',
 }
+const xData = `{
+  open() { $refs.modal.showModal() },
+  close() { $refs.modal.close() },
+  checkClose(e) { !this.$refs.content.contains(e.target) && this.close() },
+}`;
 ---
 
-<!-- Search Icon Button -->
-<div>
-  <button id="search-button" aria-label="Open search" class={className.button}>
+<!-- Search Component with Alpine.js -->
+<div x-data={xData}>
+  <!-- Search Icon Button -->
+  <button
+    @click="open"
+    aria-label="Open search"
+    class={className.button}
+  >
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="11" cy="11" r="8"></circle>
       <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
   </button>
+
+  <!-- Search Modal Dialog -->
+  <dialog
+    x-ref="modal"
+    @click="checkClose"
+    @keydown.escape="close"
+    class="border-none rounded-xl p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+  >
+    <div x-ref="content" class="p-5">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="m-0 text-2xl">Search</h2>
+        <button
+          @click="close"
+          aria-label="Close search"
+          class={className.button}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div>
+        <Search id="search" uiOptions={{ showImages: false }} />
+      </div>
+    </div>
+  </dialog>
 </div>
-
-<!-- Search Modal Dialog -->
-<dialog id="search-modal" class="border-none rounded-xl p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm">
-  <div id="model-content" class="p-5">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="m-0 text-2xl">Search</h2>
-      <button id="close-modal" aria-label="Close search" class={className.button}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-    </div>
-    <div>
-      <Search id="search" uiOptions={{ showImages: false }} />
-    </div>
-  </div>
-</dialog>
-
-
-
-<script>
-  // Initialize the modal functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    const searchButton = document.getElementById('search-button');
-    const searchModal = document.getElementById('search-modal') as HTMLDialogElement;
-    const closeModal = document.getElementById('close-modal');
-
-    if (searchButton && searchModal && closeModal) {
-      // Open modal when search button is clicked
-      searchButton.addEventListener('click', () => {
-        searchModal.showModal();
-      });
-
-      // Close modal when close button is clicked
-      closeModal.addEventListener('click', () => {
-        searchModal.close();
-      });
-
-      // Close modal when clicking outside of it
-      searchModal.addEventListener('click', (event) => {
-        const modalContent = searchModal.querySelector('#model-content');
-        if (modalContent && event.target instanceof Node && 
-            event.target === searchModal && !modalContent.contains(event.target)) {
-          searchModal.close();
-        }
-      });
-
-      // Close modal with Escape key
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && searchModal.open) {
-          searchModal.close();
-        }
-      });
-    }
-  });
-</script>
