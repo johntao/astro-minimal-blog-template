@@ -5,9 +5,9 @@ import SearchModal from "@/layouts/v01/SearchModal.astro";
 ---
 
 <header class="bar">
-  <div class="header-container">
+  <div class="flex justify-between items-center w-full">
     <!-- Logo/Title Section -->
-    <div class="logo-section">
+    <div class="flex-1">
       <h1 class="text-xl font-medium"><Link href="/">My Astro Blog</Link></h1>
     </div>
 
@@ -28,16 +28,3 @@ import SearchModal from "@/layouts/v01/SearchModal.astro";
     </div>
   </div>
 </header>
-
-<style>
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .logo-section {
-    flex: 1;
-  }
-</style>

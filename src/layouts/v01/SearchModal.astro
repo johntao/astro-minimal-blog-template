@@ -1,11 +1,14 @@
 ---
 // Search Modal Component
 import Search from "astro-pagefind/components/Search";
+const className = {
+  button: 'bg-transparent border-none cursor-pointer p-2 rounded-full flex items-center justify-center transition-colors hover:bg-black/5',
+}
 ---
 
 <!-- Search Icon Button -->
-<div class="search-icon-container">
-  <button id="search-button" aria-label="Open search">
+<div>
+  <button id="search-button" aria-label="Open search" class={className.button}>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="11" cy="11" r="8"></circle>
       <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -14,91 +17,24 @@ import Search from "astro-pagefind/components/Search";
 </div>
 
 <!-- Search Modal Dialog -->
-<dialog id="search-modal" class="search-modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2>Search</h2>
-      <button id="close-modal" aria-label="Close search">
+<dialog id="search-modal" class="border-none rounded-xl p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm">
+  <div id="model-content" class="p-5">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="m-0 text-2xl">Search</h2>
+      <button id="close-modal" aria-label="Close search" class={className.button}>
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
     </div>
-    <div class="modal-body">
+    <div>
       <Search id="search" uiOptions={{ showImages: false }} />
     </div>
   </div>
 </dialog>
 
-<style>
-  .search-icon-container {
-    display: flex;
-    justify-content: center;
-  }
 
-  #search-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-  }
-
-  #search-button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  .search-modal {
-    border: none;
-    border-radius: 12px;
-    padding: 0;
-    max-width: 600px;
-    width: 90%;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .search-modal::backdrop {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-  }
-
-  .modal-content {
-    padding: 20px;
-  }
-
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-
-  #close-modal {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.2s;
-  }
-
-  #close-modal:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-</style>
 
 <script>
   // Initialize the modal functionality
@@ -120,7 +56,7 @@ import Search from "astro-pagefind/components/Search";
 
       // Close modal when clicking outside of it
       searchModal.addEventListener('click', (event) => {
-        const modalContent = searchModal.querySelector('.modal-content');
+        const modalContent = searchModal.querySelector('#model-content');
         if (modalContent && event.target instanceof Node && 
             event.target === searchModal && !modalContent.contains(event.target)) {
           searchModal.close();
