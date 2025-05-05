@@ -1,14 +1,5 @@
 @import 'tailwindcss';
 
-:root {
-  /* Layout configuration variables */
-  --header-height: 4rem; /* 64px */
-  --footer-height: 4rem; /* 64px */
-  --layout-max-width: 900px;
-  --layout-padding: 1rem;
-  
-}
-
 @theme inline {
   /* dimensions layout width/ height */
   --spacing-bar-height: calc(var(--spacing) * 12);
@@ -18,17 +9,17 @@
 }
 
 .bar {
-  @apply bg-white flex items-center w-full h-bar-height border-gray-200;
+  @apply h-bar-height w-full bg-white flex items-center border-gray-200;
   @variant headr {
     @apply border-b;
   }
   @variant footr {
-    @apply border-t mt-auto;
+    @apply border-t;
   }
 }
 
 .bar > div {
-  @apply max-w-main-width mx-auto px-layout-padding w-full flex justify-between items-center;
+  @apply max-w-main-width px-layout-padding w-full mx-auto flex justify-between items-center;
 }
 
 @custom-variant headr (&:where(header.bar));

@@ -9,18 +9,18 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<div class="flex flex-col md:flex-row gap-8">
+<div class="flex flex-col md:flex-row gap-4">
   <!-- Left Section: TOC -->
-  <section id="left" class="md:w-1/4">
+  <section id="d-left">
     <TOC headings={headings} />
   </section>
 
   <!-- Center Section: Main Content -->
-  <section id="center" class="md:w-3/4">
+  <section id="d-center">
     <MainContent post={post} Content={Content} />
   </section>
 
-  <div class="mt-8">
+  <div>
     <Link href="/">← Back to Home</Link>
   </div>
 </div>
