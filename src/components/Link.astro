@@ -1,25 +1,25 @@
 ---
-// Link component - A reusable component for all anchor links
-// This centralizes our link styling and behavior
+import type { HTMLAttributes } from 'astro/types';
 
-interface Props {
-  href: string;
-  external?: boolean;
-  className?: string;
-  title?: string;
-}
+type Props = HTMLAttributes<'a'> & { external?: boolean };
 
 const { 
   href, 
   external = false, 
-  className = "",
+  class: classList = "",
   ...rest 
 } = Astro.props;
 
 // const anchorUrl = href;
+// const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 // const thisSubAbs = Astro.url.pathname;
 // const isActive = anchorUrl === thisSubAbs;
 // External link attributes for security and UX
+/* Active link styles */
+/* a[data-active="true"] {
+  font-weight: 500;
+  text-decoration: underline;
+} */
 const externalAttrs = external 
   ? { target: "_blank", rel: "noopener noreferrer" } 
   : {};
@@ -27,7 +27,7 @@ const externalAttrs = external
 
 <a 
   href={href} 
-  class={className}
+  class:list={["text-blue-600 transition-colors duration-200 hover:text-blue-800", classList]}
   {...externalAttrs}
   {...rest}
 >

@@ -4,8 +4,9 @@ import Link from './Link.astro';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer>
+<footer class="bar">
   <div>
+    <!-- Copyright Section -->
     <div>
       &copy; {currentYear} My Astro Blog · 
       <Link href="https://creativecommons.org/licenses/by-nc/4.0/" external>
@@ -13,9 +14,10 @@ const currentYear = new Date().getFullYear();
       </Link>
     </div>
     
+    <!-- Links Section -->
     <div>
-      <Link href="/rss.xml">RSS</Link>
-      <Link href="/sitemap.xml">Sitemap</Link>
+      <Link href="/rss.xml" class="mr-4">RSS</Link>
+      <Link href="/sitemap.xml" class="mr-4">Sitemap</Link>
       <Link href="https://astro.build" external>
         Powered by Astro
       </Link>

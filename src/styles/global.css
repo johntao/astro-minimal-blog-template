@@ -1,18 +1,35 @@
 @import 'tailwindcss';
 
-/* Unified anchor styles */
-a {
-  color: var(--color-blue-600);
-  transition-property: color;
-  transition-duration: 200ms;
+:root {
+  /* Layout configuration variables */
+  --header-height: 4rem; /* 64px */
+  --footer-height: 4rem; /* 64px */
+  --layout-max-width: 900px;
+  --layout-padding: 1rem;
+  
 }
 
-a:hover {
-  color: var(--color-blue-800);
+@theme inline {
+  /* dimensions layout width/ height */
+  --spacing-bar-height: calc(var(--spacing) * 12);
+  --spacing-main-width: var(--container-4xl);
+  /* dimensions layout padding/ margin */
+  --spacing-layout-padding: calc(var(--spacing) * 4);
 }
 
-/* Active link styles */
-/* a[data-active="true"] {
-  font-weight: 500;
-  text-decoration: underline;
-} */
+.bar {
+  @apply bg-white flex items-center w-full h-bar-height border-gray-200;
+  @variant headr {
+    @apply border-b;
+  }
+  @variant footr {
+    @apply border-t mt-auto;
+  }
+}
+
+.bar > div {
+  @apply max-w-main-width mx-auto px-layout-padding w-full flex justify-between items-center;
+}
+
+@custom-variant headr (&:where(header.bar));
+@custom-variant footr (&:where(footer.bar));
