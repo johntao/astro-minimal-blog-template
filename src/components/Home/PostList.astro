@@ -9,24 +9,24 @@ const allPosts = (await getCollection('blog')).sort(
 );
 ---
 
-<div>
-  <h2>Latest Blog Posts</h2>
+<div class="max-w-3xl mx-auto py-8">
+  <h2 class="text-2xl font-medium mb-6 text-gray-800 border-b pb-2">All Blog Posts</h2>
 
-  <ul>
+  <ul class="space-y-6 list-none">
     {allPosts.map((post) => (
-      <li>
-        <div>
-          <time datetime={post.data.pubDate.toISOString()}>
-            {post.data.pubDate.toLocaleDateString()}
+      <li class="border-l-2 border-gray-200 pl-4 py-2 transition-all hover:border-indigo-500 hover:bg-gray-50 rounded-r">
+        <div class="flex items-center text-sm text-gray-500 mb-1">
+          <time datetime={post.data.pubDate.toISOString()} class="font-mono">
+            {post.data.pubDate.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'})}
           </time>
         </div>
-        <h3>
-          <Link href={`/posts/${post.id}`}>
+        <h3 class="text-lg font-medium mb-1">
+          <Link href={`/posts/${post.id}`} class="text-gray-900 hover:text-indigo-600 no-underline">
             {post.data.title || 'Untitled Post'}
           </Link>
         </h3>
         {post.data.description &&
-          <p>{post.data.description}</p>
+          <p class="text-gray-600 text-sm leading-relaxed">{post.data.description}</p>
         }
       </li>
     ))}

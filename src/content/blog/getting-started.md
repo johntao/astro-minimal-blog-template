@@ -4,8 +4,6 @@ description: A guide to help you start your Astro journey
 pubDate: 2025-04-30
 ---
 
-# Getting Started with Astro
-
 In this post, I'll walk you through the basics of setting up an Astro project and creating your first pages.
 
 ## Installation
