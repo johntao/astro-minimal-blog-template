@@ -30,9 +30,9 @@ const xData = `{
     x-ref="modal"
     @click="checkClose"
     @keydown.escape="close"
-    class="border-none rounded-xl p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+    class="border-none rounded-lg p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm mt-16 mx-auto overflow-hidden"
   >
-    <div x-ref="content" class="p-5">
+    <div x-ref="content" class="p-5 max-h-[calc(100vh-4rem)] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">
         <h2 class="m-0 text-2xl">Search</h2>
         <button
