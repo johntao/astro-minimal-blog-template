@@ -9,14 +9,14 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<div class="flex flex-col md:flex-row gap-4">
+<div class="flex flex-col md:flex-row gap-8 relative">
   <!-- Left Section: TOC -->
-  <section id="d-left">
+  <aside id="d-left" class="w-48 md:sticky md:self-start">
     <TOC headings={headings} />
-  </section>
+  </aside>
 
   <!-- Center Section: Main Content -->
-  <section id="d-center">
+  <section id="d-center" class="flex-1 min-w-0">
     <MainContent post={post} Content={Content} />
   </section>
 </div>
