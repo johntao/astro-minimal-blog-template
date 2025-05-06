@@ -18,21 +18,21 @@ if (hasH1Headings) {
 
 ---
 
-<div class="toc-container sticky top-20 max-h-[calc(100vh-8rem)] overflow-y-auto pr-4 pb-8 text-sm">
+<div class="toc-container max-h-[calc(100vh-8rem)] overflow-y-auto pr-4 pb-8 text-sm">
   <h2 class="text-lg font-semibold mb-4 text-neutral-800 border-b pb-2">Table of Contents</h2>
 
   {headings && headings.length > 0 ? (
     <nav class="toc-nav">
-      <ul class="space-y-2">
+      <ul class="space-y-1">
         {headings.map((heading) => (
-          <li class={`toc-item depth-${heading.depth}`}>
+          <li class={`toc-item depth-${heading.depth} leading-tight`}>
             <Link 
               href={`#${heading.slug}`} 
               class:list={[
-                'toc-link block transition-all duration-200 hover:text-blue-600 py-1',
+                'toc-link block transition-all duration-200 hover:text-blue-600 py-0.5',
                 {'pl-0 font-medium': heading.depth === 2},
-                {'pl-4': heading.depth === 3},
-                {'pl-8 text-xs': heading.depth === 4},
+                {'pl-3': heading.depth === 3},
+                {'pl-6 text-xs': heading.depth === 4},
               ]}
               data-heading-slug={heading.slug}
             >
