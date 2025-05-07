@@ -8,10 +8,25 @@
   --spacing-main-width: var(--container-4xl);
   /* dimensions layout padding/ margin */
   --spacing-layout-padding: calc(var(--spacing) * 4);
+  /* --color-primary-bg: var(--color-yellow-50); */
+  --color-primary-ui: var(--color-white);
+  --color-primary-link: var(--color-blue-500);
+  --color-primary-text: var(--color-gray-950);
+  --color-secondary-text: var(--color-gray-500);
+  --color-secondary-ui: var(--color-gray-200);
+}
+@theme {
+  --color-primary-bg: #f8f7f2;
+  /* --color-soft-white: #f9f9f9;
+  --color-soft-black: #1a1a1a; */
+  /* --color-soft-white: #ff0000;
+  --color-soft-black: #00ff00; */
+  /* --color-soft-white: #f8f7f2;
+  --color-soft-black: #2d2d2d; */
 }
 
 .bar {
-  @apply h-bar-height w-full bg-white flex items-center border-gray-200;
+  @apply h-bar-height w-full bg-primary-ui flex items-center border-secondary-ui;
   @variant headr {
     @apply border-b;
   }

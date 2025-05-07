@@ -3,16 +3,16 @@
 ---
 <div 
   x-data="{ isVisible: $persist(true) }"
-  class="border rounded-lg p-4 shadow-sm bg-white"
+  class="border rounded-lg p-4 shadow-sm bg-primary-ui"
 >
   <div 
     class="flex justify-between items-center cursor-pointer mb-3" 
     @click="isVisible = !isVisible"
   >
-    <h2 class="text-xl font-bold text-gray-800">About Me</h2>
+    <h2 class="text-xl font-bold">About Me</h2>
     <button
       aria-label="Toggle about me section"
-      class="text-gray-500 hover:text-gray-700 focus:outline-none transition-colors"
+      class="text-secondary-text cursor-pointer"
     >
       <!-- Eye Open Icon (when content is visible) -->
       <svg 
@@ -56,7 +56,7 @@
   </div>
   <div
     x-show="isVisible"
-    class="space-y-3 text-gray-700"
+    class="space-y-3"
   >
     <p>Hello! I'm a passionate blogger and developer who loves to share insights about technology, programming, and web development.</p>
     <p>This blog is my platform to document my journey, share what I've learned, and hopefully help others along the way.</p>

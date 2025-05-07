@@ -17,8 +17,22 @@ const { title } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<!-- <style>
+    fontFamily: {
+      'mono': ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+      'sans': ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+    },
+			body {
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+				background-color: var(--soft-white);
+				color: var(--soft-black);
+			}
+			.bg-white, [class*="bg-white"] {
+				background-color: var(--soft-white) !important;
+			}
+		</style> -->
 	</head>
-	<body class="bg-gray-50 min-h-screen flex flex-col">
+	<body class="bg-primary-bg text-primary-text min-h-screen flex flex-col font-mono">
 		<!-- Top Section: Header Component -->
 		<section id="top">
 			<Header />

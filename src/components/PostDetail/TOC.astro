@@ -19,7 +19,7 @@ if (hasH1Headings) {
 ---
 
 <div class="toc-container max-h-[calc(100vh-8rem)] overflow-y-auto pr-4 pb-8 text-sm">
-  <h2 class="text-lg font-semibold mb-4 text-neutral-800 border-b pb-2">Table of Contents</h2>
+  <h2 class="text-lg font-semibold mb-4 border-b pb-2">Table of Contents</h2>
 
   {headings && headings.length > 0 ? (
     <nav class="toc-nav">
@@ -29,7 +29,7 @@ if (hasH1Headings) {
             <Link 
               href={`#${heading.slug}`} 
               class:list={[
-                'toc-link block transition-all duration-200 hover:text-blue-600 py-0.5',
+                'toc-link block py-0.5',
                 {'pl-0 font-medium': heading.depth === 2},
                 {'pl-3': heading.depth === 3},
                 {'pl-6 text-xs': heading.depth === 4},
@@ -43,7 +43,7 @@ if (hasH1Headings) {
       </ul>
     </nav>
   ) : (
-    <p class="text-neutral-500 italic">No table of contents available for this post.</p>
+    <p class="text-secondary-text italic">No table of contents available for this post.</p>
   )}
 </div>
 
@@ -79,11 +79,11 @@ if (hasH1Headings) {
         if (entry.isIntersecting) {
           // Remove active class from all links
           tocLinks.forEach(link => {
-            link.classList.remove('text-blue-600', 'font-medium');
+            link.classList.remove('text-primary-link', 'font-medium');
           });
           
           // Add active class to current link
-          tocLink.classList.add('text-blue-600', 'font-medium');
+          tocLink.classList.add('text-primary-link', 'font-medium');
         }
       });
     }, observerOptions);
@@ -126,7 +126,7 @@ if (hasH1Headings) {
   /* Minimal styling for the TOC */
   .toc-container {
     scrollbar-width: thin;
-    scrollbar-color: var(--colors-neutral-300) transparent;
+    scrollbar-color: var(--colors-secondary-ui) transparent;
   }
   
   .toc-container::-webkit-scrollbar {
@@ -138,7 +138,7 @@ if (hasH1Headings) {
   }
   
   .toc-container::-webkit-scrollbar-thumb {
-    background-color: var(--colors-neutral-300);
+    background-color: var(--colors-secondary-ui);
     border-radius: 4px;
   }
   
@@ -147,7 +147,7 @@ if (hasH1Headings) {
     position: relative;
   }
   
-  .toc-link.text-blue-600::before {
+  .toc-link.text-primary-link::before {
     content: '';
     position: absolute;
     left: -10px;
@@ -155,7 +155,7 @@ if (hasH1Headings) {
     transform: translateY(-50%);
     width: 3px;
     height: 1rem;
-    background-color: var(--colors-blue-600);
+    background-color: var(--colors-primary-link);
     border-radius: 2px;
   }
 </style>
