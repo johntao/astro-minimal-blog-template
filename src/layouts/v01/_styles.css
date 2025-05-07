@@ -26,7 +26,7 @@
 }
 
 .bar {
-  @apply h-bar-height w-full bg-primary-ui flex items-center border-secondary-ui;
+  @apply h-bar-height w-full bg-primary-ui/90 flex items-center border-secondary-ui;
   @variant headr {
     @apply border-b;
   }
