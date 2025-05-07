@@ -1,9 +1,17 @@
 ---
 import ViewCounter from "./ViewCounter.astro";
+import readingTime from "reading-time";
+import type { CollectionEntry } from "astro:content";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 
 // MainContent component for the post detail center section
+type Props = { post: CollectionEntry<"blog"> , Content: AstroComponentFactory };
 const { post, Content } = Astro.props;
 const slug = Astro.params.slug || post.id;
+
+// Calculate reading time
+const readingStats = readingTime(post.body ?? '');
+const readingMinutes = Math.ceil(readingStats.minutes);
 ---
 
 <article class="prose-sm mx-auto">
@@ -25,9 +33,37 @@ const slug = Astro.params.slug || post.id;
         })}
       </time>
     )}
+    
+    <div class="flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13c-1.168-.775-2.754-1.253-4.5-1.253-1.746 0-3.332.477-4.5 1.253"></path>
+      </svg>
+      {readingMinutes} min read
+    </div>
   </div>
 
   <div class="prose-headings:scroll-mt-20 prose-a:underline-offset-2 prose-img:rounded-lg prose-img:shadow-md">
     <Content />
   </div>
 </article>
+
+<script>
+  const articleEl = document.querySelector("article.prose-sm");
+  if (articleEl) {
+    articleEl.addEventListener("click", async (event) => {
+      const target = event.target as HTMLAnchorElement;
+      if (!target) return;
+      switch (target.parentElement?.tagName) {
+        case 'H2':
+        case 'H3':
+        case 'H4':
+          break;
+        default:
+          return;
+      }
+      const link = target.href;
+      await navigator.clipboard.writeText(link);
+      console.log(`Copied to clipboard: ${link}`);
+    });
+  }
+</script>

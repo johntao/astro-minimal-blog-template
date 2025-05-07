@@ -15,6 +15,8 @@ import db from '@astrojs/db';
 
 import alpinejs from '@astrojs/alpinejs';
 
+import expressiveCode from 'astro-expressive-code';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
@@ -24,15 +26,23 @@ export default defineConfig({
     },
     output: "static",
     markdown: {
-        syntaxHighlight: 'shiki',
-        shikiConfig: { theme: 'dark-plus' },
         // remarkPlugins: [remarkToc],
         // rehypePlugins: [[rehypeAutolinkHeadings, { behavior: 'wrap', }]],
         rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap', }]],
         remarkRehype: { footnoteLabel: 'Footnotes' },
         gfm: true,
     },
-    integrations: [mdx(), d2(), pagefind(), db(), alpinejs({ entrypoint: '/src/alpine.main.ts' })],
+    integrations: [expressiveCode({
+        themes: ['dark-plus'],
+        shiki: {
+          // You can pass additional plugin options here,
+          // e.g. to load custom language grammars:
+          langs: [
+            // import('./some-exported-grammar.mjs'),
+            // JSON.parse(fs.readFileSync('./some-json-grammar.json', 'utf-8'))
+          ],
+        },
+    }), mdx(), d2(), pagefind(), db(), alpinejs({ entrypoint: '/src/alpine.main.ts' })],
     vite: {
         plugins: [tailwindcss()],
         resolve: {

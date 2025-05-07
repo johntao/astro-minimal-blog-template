@@ -27,7 +27,17 @@ import SearchModal from "@/layouts/v01/SearchModal.astro";
       </div>
     </div>
   </div>
+  
+  
 </header>
+
+<!-- Reading progress bar - Only visible on article pages -->
+<div id="reading-progress-container" class="w-full h-1 bg-transparent hidden fixed z-20">
+  <div id="reading-progress-bar" class="h-full bg-primary-link w-0 transition-all duration-100"></div>
+</div>
+
+<!-- Add a spacer to prevent content from jumping when header becomes fixed -->
+<div class="h-bar-height"></div>
 
 <script>
   // JavaScript to handle scroll behavior
@@ -59,7 +69,52 @@ import SearchModal from "@/layouts/v01/SearchModal.astro";
       lastScrollY = currentScrollY;
     });
   }
+  
+  // Reading progress bar functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check if we're on a blog post page
+    const isPostPage = window.location.pathname.includes('/posts/');
+    
+    if (isPostPage) {
+      const progressContainer = document.getElementById('reading-progress-container');
+      const progressBar = document.getElementById('reading-progress-bar');
+      
+      if (progressContainer && progressBar) {
+        // Show the progress container on post pages
+        progressContainer.classList.remove('hidden');
+        
+        // Calculate and update the reading progress
+        const updateReadingProgress = () => {
+          const article = document.getElementById('d-center');
+          
+          if (article) {
+            // Calculate how far down the page the user has scrolled
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const articleHeight = article.offsetHeight;
+            const windowHeight = window.innerHeight;
+            
+            // Calculate reading progress percentage
+            // We subtract the window height to account for the visible portion
+            const scrollDistance = articleHeight - windowHeight;
+            let progress = (scrollTop / scrollDistance) * 100;
+            
+            // Clamp progress between 0 and 100
+            progress = Math.min(100, Math.max(0, progress));
+            
+            // Update the progress bar width
+            progressBar.style.width = `${progress}%`;
+          }
+        };
+        
+        // Initial calculation
+        updateReadingProgress();
+        
+        // Update on scroll
+        window.addEventListener('scroll', updateReadingProgress);
+        
+        // Update on window resize
+        window.addEventListener('resize', updateReadingProgress);
+      }
+    }
+  });
 </script>
-
-<!-- Add a spacer to prevent content from jumping when header becomes fixed -->
-<div class="h-bar-height"></div>
