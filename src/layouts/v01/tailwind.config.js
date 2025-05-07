@@ -50,8 +50,8 @@ module.exports = {
         sm: {
           css: [
             {
-              // fontSize: rem(16), //from base
-              fontSize: rem(18), //from lg
+              fontSize: rem(16), //from base
+              // fontSize: rem(18), //from lg
               // lineHeight: round(32 / 18),
               h1: {
                 fontSize: em(48, 18),
