@@ -29,10 +29,10 @@ if (hasH1Headings) {
             <Link 
               href={`#${heading.slug}`} 
               class:list={[
-                'toc-link block py-0.5',
-                {'pl-0 font-medium': heading.depth === 2},
+                'toc-link block py-0.5 text-xs',
+                {'pl-0': heading.depth === 2},
                 {'pl-3': heading.depth === 3},
-                {'pl-6 text-xs': heading.depth === 4},
+                {'pl-6': heading.depth === 4},
               ]}
               data-heading-slug={heading.slug}
             >
@@ -142,20 +142,4 @@ if (hasH1Headings) {
     border-radius: 4px;
   }
   
-  /* Transition for active state */
-  .toc-link {
-    position: relative;
-  }
-  
-  .toc-link.text-primary-link::before {
-    content: '';
-    position: absolute;
-    left: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 1rem;
-    background-color: var(--colors-primary-link);
-    border-radius: 2px;
-  }
 </style>

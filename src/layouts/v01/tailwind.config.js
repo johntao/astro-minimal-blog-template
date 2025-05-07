@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       typography: () => ({
-        //copy from base
+        //fontSize values copy from base
         // sm: {
         //   css: [
         //     {
@@ -46,7 +46,7 @@ module.exports = {
         //     },
         //   ],
         // },
-        //copy from lg
+        //fontSize values copy from lg
         sm: {
           css: [
             {
