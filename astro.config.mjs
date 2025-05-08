@@ -30,17 +30,24 @@ export default defineConfig({
         remarkRehype: { footnoteLabel: 'Footnotes' },
         gfm: true,
     },
-    integrations: [expressiveCode({
-        themes: ['dark-plus'],
-        shiki: {
-            // You can pass additional plugin options here,
-            // e.g. to load custom language grammars:
-            langs: [
-                // import('./some-exported-grammar.mjs'),
-                // JSON.parse(fs.readFileSync('./some-json-grammar.json', 'utf-8'))
-            ],
-        },
-    }), mdx(), d2(), pagefind(), db(), alpinejs({ entrypoint: '/src/alpine.main.ts' }), sitemap()],
+    integrations: [
+        expressiveCode({
+            themes: ['dark-plus'],
+            shiki: {
+                // You can pass additional plugin options here,
+                // e.g. to load custom language grammars:
+                langs: [
+                    // import('./some-exported-grammar.mjs'),
+                    // JSON.parse(fs.readFileSync('./some-json-grammar.json', 'utf-8'))
+                ],
+            },
+        }),
+        mdx(),
+        d2({ skipGeneration: !!process.env['VERCEL'], }),
+        pagefind(),
+        db(),
+        alpinejs({ entrypoint: '/src/alpine.main.ts' }), sitemap()
+    ],
     vite: {
         plugins: [tailwindcss()],
         resolve: {
