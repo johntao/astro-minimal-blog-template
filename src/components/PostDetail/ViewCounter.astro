@@ -1,11 +1,8 @@
 ---
-// import { IS_DEMO_SITE } from 'astro.config.mjs';
-
 interface Props {
   slug: string;
 }
 const { slug } = Astro.props;
-// const xx = IS_DEMO_SITE;
 ---
 <div
   x-data={`viewCounter('${slug}')`}

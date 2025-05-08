@@ -15,7 +15,9 @@ import alpinejs from '@astrojs/alpinejs';
 import expressiveCode from 'astro-expressive-code';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
-import siteConfig from './src/site.config.ts';
+import { loadEnv } from "vite";
+
+const env = loadEnv(process.env.NODE_ENV || 'production', process.cwd(), "");
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -46,7 +48,7 @@ export default defineConfig({
             },
         }),
         mdx(),
-        d2({ skipGeneration: siteConfig.isDemoSite }),
+        d2({ skipGeneration: env.PUBLIC_SITE_NAME === 'demo' }),
         pagefind(),
         db(),
         alpinejs({ entrypoint: '/src/alpine.main.ts' }), sitemap()
