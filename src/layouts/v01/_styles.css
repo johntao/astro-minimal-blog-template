@@ -47,3 +47,13 @@
 [x-cloak] {
   display: none !important;
 }
+
+.prose-sm h2>a::before {
+  content: '# ';
+}
+.prose-sm h3>a::before {
+  content: '## ';
+}
+.prose-sm h4>a::before {
+  content: '### ';
+}
