@@ -1,17 +1,20 @@
 ---
 // Header component (shared across pages)
-import Search from "astro-pagefind/components/Search";
 import Link from "@/components/Link.astro";
+import SearchModal from "@/layouts/v01/SearchModal.astro";
 ---
 
 <header class="bar">
-  <div>
+  <div class="flex justify-between items-center w-full">
     <!-- Logo/Title Section -->
-    <div>
+    <div class="flex-1">
       <h1 class="text-xl font-medium"><Link href="/">My Astro Blog</Link></h1>
     </div>
 
-    <!-- Right Section: Social Links and Search -->
+    <!-- Center Section: Search Icon and Modal -->
+    <SearchModal />
+
+    <!-- Right Section: Social Links -->
     <div class="flex items-center gap-6">
       <!-- Social Links -->
       <div>
@@ -21,11 +24,6 @@ import Link from "@/components/Link.astro";
         <Link href="https://twitter.com/yourusername" external title="Twitter">
           Twitter
         </Link>
-      </div>
-
-      <!-- Search Form -->
-      <div>
-        <Search id="search" uiOptions={{ showImages: false }} />
       </div>
     </div>
   </div>

@@ -1,0 +1,54 @@
+---
+// Search Modal Component
+import Search from "astro-pagefind/components/Search";
+const className = {
+  button: 'bg-transparent border-none cursor-pointer p-2 rounded-full flex items-center justify-center transition-colors hover:bg-black/5',
+}
+const xData = `{
+  open() { $refs.modal.showModal() },
+  close() { $refs.modal.close() },
+  checkClose(e) { !this.$refs.content.contains(e.target) && this.close() },
+}`;
+---
+
+<!-- Search Component with Alpine.js -->
+<div x-data={xData}>
+  <!-- Search Icon Button -->
+  <button
+    @click="open"
+    aria-label="Open search"
+    class={className.button}
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+  </button>
+
+  <!-- Search Modal Dialog -->
+  <dialog
+    x-ref="modal"
+    @click="checkClose"
+    @keydown.escape="close"
+    class="border-none rounded-lg p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm mt-16 mx-auto overflow-hidden"
+  >
+    <div x-ref="content" class="p-5 max-h-[calc(100vh-4rem)] overflow-y-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="m-0 text-2xl">Search</h2>
+        <button
+          @click="close"
+          aria-label="Close search"
+          class={className.button}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div>
+        <Search id="search" uiOptions={{ showImages: false }} />
+      </div>
+    </div>
+  </dialog>
+</div>

@@ -32,7 +32,7 @@ export default defineConfig({
         remarkRehype: { footnoteLabel: 'Footnotes' },
         gfm: true,
     },
-    integrations: [mdx(), d2(), pagefind(), db(), alpinejs()],
+    integrations: [mdx(), d2(), pagefind(), db(), alpinejs({ entrypoint: '/src/alpine.main.ts' })],
     vite: {
         plugins: [tailwindcss()],
         resolve: {

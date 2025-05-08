@@ -1,15 +1,7 @@
 ---
 
 ---
-
-<script>
-  import Alpine from 'alpinejs';
-  import persist from '@alpinejs/persist';
-  Alpine.plugin(persist);
-</script>
-
-<div
- 
+<div 
   x-data="{ isVisible: $persist(true) }"
 >
   <div>
@@ -23,7 +15,6 @@
     </button>
   </div>
   <div
-   
     x-show="isVisible"
   >
     <p>Hello! I'm a passionate blogger and developer who loves to share insights about technology, programming, and web development.</p>
