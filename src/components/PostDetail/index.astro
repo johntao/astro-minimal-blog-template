@@ -3,6 +3,7 @@
 import { render, type CollectionEntry } from "astro:content";
 import TOC from './TOC.astro';
 import MainContent from './MainContent.astro';
+import Toast from "../Toast.astro";
 
 type Props = { post: CollectionEntry<"blog"> };
 const { post } = Astro.props;
@@ -20,3 +21,5 @@ const { Content, headings } = await render(post);
     <MainContent post={post} Content={Content} />
   </section>
 </div>
+
+<Toast />

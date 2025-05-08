@@ -50,7 +50,7 @@ if (hasH1Headings) {
 <script>
   // Intersection Observer to highlight current heading in TOC
   document.addEventListener('DOMContentLoaded', () => {
-    const tocLinks = document.querySelectorAll('.toc-link');
+    const tocLinks = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
     const articleHeadings = document.querySelectorAll('article h2, article h3, article h4');
     
     if (!tocLinks.length || !articleHeadings.length) return;
@@ -114,11 +114,16 @@ if (hasH1Headings) {
           top: offsetTop - 100, // Adjust offset as needed
           behavior: 'smooth'
         });
+        navigator.clipboard.writeText(link.href);
+        
+        // Use the global showToast function from the shared Toast component
+        window.showToast("Link Copied");
         
         // Update URL hash without jumping
         history.pushState(null, '', href);
       });
     });
+    
   });
 </script>
 

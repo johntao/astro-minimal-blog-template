@@ -64,6 +64,9 @@ const readingMinutes = Math.ceil(readingStats.minutes);
       const link = target.href;
       await navigator.clipboard.writeText(link);
       console.log(`Copied to clipboard: ${link}`);
+      
+      // Use the global showToast function from the shared Toast component
+      window.showToast("Link Copied");
     });
   }
 </script>

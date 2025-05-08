@@ -1,0 +1,64 @@
+---
+// Toast notification component that can be reused across different pages/components
+---
+
+<div id="toast" class="fixed bottom-4 right-4 bg-primary-ui px-4 py-2 rounded shadow-md opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+  Link Copied
+</div>
+
+<script>
+  // Create a singleton pattern for the toast
+  class ToastManager {
+    private static instance: ToastManager;
+    private toast: HTMLElement | null = null;
+    private timeout: number | null = null;
+
+    private constructor() {
+      this.toast = document.getElementById('toast');
+    }
+
+    public static getInstance(): ToastManager {
+      if (!ToastManager.instance) {
+        ToastManager.instance = new ToastManager();
+      }
+      return ToastManager.instance;
+    }
+
+    public show(message?: string): void {
+      if (!this.toast) return;
+      
+      // Update message if provided
+      if (message) {
+        this.toast.textContent = message;
+      }
+      
+      // Clear any existing timeout
+      if (this.timeout) {
+        clearTimeout(this.timeout);
+      }
+      
+      // Show toast
+      this.toast.classList.add("opacity-100");
+      
+      // Hide after 2 seconds
+      this.timeout = window.setTimeout(() => {
+        if (this.toast) {
+          this.toast.classList.remove("opacity-100");
+        }
+        this.timeout = null;
+      }, 2000);
+    }
+  }
+
+  // Export the toast manager as a global variable
+  declare global {
+    interface Window {
+      showToast: (message?: string) => void;
+    }
+  }
+
+  // Initialize and expose the showToast method globally
+  window.showToast = (message?: string) => {
+    ToastManager.getInstance().show(message);
+  };
+</script>
