@@ -1,13 +1,16 @@
 ---
+import EyeOpenIcon from '@/icons/svg/EyeOpenIcon.astro';
+
 interface Props {
   slug: string;
 }
 const { slug } = Astro.props;
 ---
 <div
+  title="View Count"
   x-data={`viewCounter('${slug}')`}
 >
-  Views:
+  <EyeOpenIcon size={16} />
   <span x-show="loading" x-cloak>Loading...</span>
   <span x-show="!loading && error" x-cloak x-bind:title="error">--</span>
   <span x-show="!loading && !error" x-cloak x-text="views"></span>
