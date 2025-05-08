@@ -15,7 +15,10 @@ import alpinejs from '@astrojs/alpinejs';
 import expressiveCode from 'astro-expressive-code';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
+import siteConfig from './src/site.config.ts';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 // https://astro.build/config
 export default defineConfig({
     site: 'https://stargazers.club',
@@ -43,7 +46,7 @@ export default defineConfig({
             },
         }),
         mdx(),
-        d2({ skipGeneration: !!process.env['VERCEL'], }),
+        d2({ skipGeneration: siteConfig.isDemoSite }),
         pagefind(),
         db(),
         alpinejs({ entrypoint: '/src/alpine.main.ts' }), sitemap()

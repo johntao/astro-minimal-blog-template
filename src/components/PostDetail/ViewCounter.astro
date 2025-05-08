@@ -1,8 +1,11 @@
 ---
+// import { IS_DEMO_SITE } from 'astro.config.mjs';
+
 interface Props {
   slug: string;
 }
 const { slug } = Astro.props;
+// const xx = IS_DEMO_SITE;
 ---
 <div
   x-data={`viewCounter('${slug}')`}
@@ -10,11 +13,12 @@ const { slug } = Astro.props;
   Views:
   <span x-show="loading" x-cloak>Loading...</span>
   <span x-show="!loading && error" x-cloak x-bind:title="error">--</span>
-  <span x-show="!loading && !error" x-cloak x-text="views?.toLocaleString() || '0'"></span>
+  <span x-show="!loading && !error" x-cloak x-text="views"></span>
 </div>
 <script>
+  import siteConfig from "@/site.config.ts";
   window.Alpine.data('viewCounter', (slug: string) => ({
-    views: null,
+    views: 0,
     loading: true,
     error: '',
     async fetchViews() {
@@ -34,7 +38,11 @@ const { slug } = Astro.props;
       }
     },
     init() {
-      this.fetchViews();
+      if (siteConfig.isDemoSite) {
+        this.loading = false;
+      } else {
+        this.fetchViews();
+      }
     }
   }));
 </script>
