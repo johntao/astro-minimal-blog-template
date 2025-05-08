@@ -4,7 +4,7 @@ import Link from "@/components/Link.astro";
 import SearchModal from "@/layouts/v01/SearchModal.astro";
 ---
 
-<header class="bar">
+<header id="site-header" class="bar fixed transition-transform duration-300 z-10">
   <div class="flex justify-between items-center w-full">
     <!-- Logo/Title Section -->
     <div class="flex-1">
@@ -28,3 +28,38 @@ import SearchModal from "@/layouts/v01/SearchModal.astro";
     </div>
   </div>
 </header>
+
+<script>
+  // JavaScript to handle scroll behavior
+  let lastScrollY = window.scrollY;
+  const header = document.getElementById('site-header');
+  
+  // Make sure header exists before manipulating it
+  if (header) {
+    // Initially position the header
+    if (window.scrollY === 0) {
+      header.style.transform = 'translateY(0)';
+    }
+    
+    window.addEventListener('scroll', () => {
+      // Determine scroll direction
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY <= 0) {
+        // At the top of the page
+        header.style.transform = 'translateY(0)';
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up - show header
+        header.style.transform = 'translateY(0)';
+      } else {
+        // Scrolling down - hide header
+        header.style.transform = 'translateY(-100%)';
+      }
+      
+      lastScrollY = currentScrollY;
+    });
+  }
+</script>
+
+<!-- Add a spacer to prevent content from jumping when header becomes fixed -->
+<div class="h-bar-height"></div>

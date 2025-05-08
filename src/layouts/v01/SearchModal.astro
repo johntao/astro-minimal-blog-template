@@ -2,17 +2,16 @@
 // Search Modal Component
 import Search from "astro-pagefind/components/Search";
 const className = {
-  button: 'bg-transparent border-none cursor-pointer p-2 rounded-full flex items-center justify-center transition-colors hover:bg-black/5',
+  button: 'bg-transparent border-none cursor-pointer p-2 rounded-full flex items-center justify-center transition-colors hover:bg-primary-text/5',
 }
-const xData = `{
-  open() { $refs.modal.showModal() },
-  close() { $refs.modal.close() },
-  checkClose(e) { !this.$refs.content.contains(e.target) && this.close() },
-}`;
 ---
 
 <!-- Search Component with Alpine.js -->
-<div x-data={xData}>
+<div x-data="{
+  open() { $refs.modal.showModal() },
+  close() { $refs.modal.close() },
+  checkClose(e) { !this.$refs.content.contains(e.target) && this.close() },
+}">
   <!-- Search Icon Button -->
   <button
     @click="open"
@@ -30,7 +29,7 @@ const xData = `{
     x-ref="modal"
     @click="checkClose"
     @keydown.escape="close"
-    class="border-none rounded-lg p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-black/50 backdrop:backdrop-blur-sm mt-16 mx-auto overflow-hidden"
+    class="border-none bg-primary-ui rounded-lg p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-primary-text/50 backdrop:backdrop-blur-sm mt-16 mx-auto overflow-hidden"
   >
     <div x-ref="content" class="p-5 max-h-[calc(100vh-4rem)] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">

@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'> & { external?: boolean };
+
+const { 
+  href, 
+  external = false, 
+  class: classList = "",
+  ...rest 
+} = Astro.props;
+
+const externalAttrs = external 
+  ? { target: "_blank", rel: "noopener noreferrer" } 
+  : {};
+---
+
+<a 
+  href={href} 
+  class={classList}
+  {...externalAttrs}
+  {...rest}
+>
+  <slot />
+</a>

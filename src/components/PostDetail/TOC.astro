@@ -4,27 +4,142 @@ import Link from "@/components/Link.astro";
 
 // TOC (Table of Contents) component for the post detail left section
 // This component will extract headings from the post content and display them as a table of contents
-const { headings } = Astro.props;
 interface Props {
   headings: MarkdownHeading[];
 }
 
+const { headings } = Astro.props;
+
+// Check if there are any h1 headings (depth === 1)
+const hasH1Headings = headings.some(heading => heading.depth === 1);
+if (hasH1Headings) {
+  throw new Error('TOC component does not support h1 headings (depth === 1). Only h2-h4 are supported.');
+}
+
 ---
 
-<div>
-  <h2>Table of Contents</h2>
+<div class="toc-container max-h-[calc(100vh-8rem)] overflow-y-auto text-sm">
+  <h2 class="text-base text-center font-semibold mb-4 border-b pb-2">Table of Contents</h2>
 
   {headings && headings.length > 0 ? (
-    <nav>
-      <ul>
+    <nav class="toc-nav">
+      <ul class="space-y-1">
         {headings.map((heading) => (
-          <li class={`level-${heading.depth} ${heading.depth === 2 ? 'font-medium' : 'text-sm pl-3'}`}>
-            <Link href={`#${heading.slug}`}>{heading.text}</Link>
+          <li class={`toc-item depth-${heading.depth} leading-tight`}>
+            <Link 
+              href={`#${heading.slug}`} 
+              class:list={[
+                'toc-link block py-0.5 text-xs',
+                {'pl-0': heading.depth === 2},
+                {'pl-3': heading.depth === 3},
+                {'pl-6': heading.depth === 4},
+              ]}
+              data-heading-slug={heading.slug}
+            >
+              {heading.text}
+            </Link>
           </li>
         ))}
       </ul>
     </nav>
   ) : (
-    <p>No table of contents available for this post.</p>
+    <p class="text-secondary-text italic">No table of contents available for this post.</p>
   )}
 </div>
+
+<script>
+  // Intersection Observer to highlight current heading in TOC
+  document.addEventListener('DOMContentLoaded', () => {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const articleHeadings = document.querySelectorAll('article h2, article h3, article h4');
+    
+    if (!tocLinks.length || !articleHeadings.length) return;
+    
+    // Create a map of heading IDs to their corresponding TOC links
+    const headingMap = new Map();
+    tocLinks.forEach(link => {
+      const slug = link.getAttribute('data-heading-slug');
+      if (slug) headingMap.set(slug, link);
+    });
+    
+    // Set up the Intersection Observer
+    const observerOptions = {
+      rootMargin: '-100px 0px -66%',
+      threshold: 0
+    };
+    
+    const headingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const id = entry.target.getAttribute('id');
+        if (!id) return;
+        
+        const tocLink = headingMap.get(id);
+        if (!tocLink) return;
+        
+        if (entry.isIntersecting) {
+          // Remove active class from all links
+          tocLinks.forEach(link => {
+            link.classList.remove('text-primary-link', 'font-medium');
+          });
+          
+          // Add active class to current link
+          tocLink.classList.add('text-primary-link', 'font-medium');
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all headings
+    articleHeadings.forEach(heading => {
+      if (heading.id) {
+        headingObserver.observe(heading);
+      }
+    });
+    
+    // Handle smooth scrolling for TOC links
+    tocLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (!href) return;
+        
+        const targetElement = document.querySelector(href);
+        if (!targetElement) return;
+        
+        // Get element position with getBoundingClientRect() to avoid TypeScript error
+        const rect = targetElement.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const offsetTop = rect.top + scrollTop;
+        
+        window.scrollTo({
+          top: offsetTop - 100, // Adjust offset as needed
+          behavior: 'smooth'
+        });
+        
+        // Update URL hash without jumping
+        history.pushState(null, '', href);
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Minimal styling for the TOC */
+  .toc-container {
+    scrollbar-width: thin;
+    scrollbar-color: var(--colors-secondary-ui) transparent;
+  }
+  
+  .toc-container::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .toc-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .toc-container::-webkit-scrollbar-thumb {
+    background-color: var(--colors-secondary-ui);
+    border-radius: 4px;
+  }
+  
+</style>
