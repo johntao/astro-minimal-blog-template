@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'> & { external?: boolean };
+
+const { 
+  href, 
+  external = false, 
+  class: classList = "",
+  ...rest 
+} = Astro.props;
+
+// const anchorUrl = href;
+// const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
+// const thisSubAbs = Astro.url.pathname;
+// const isActive = anchorUrl === thisSubAbs;
+// External link attributes for security and UX
+/* Active link styles */
+/* a[data-active="true"] {
+  font-weight: 500;
+  text-decoration: underline;
+} */
+const externalAttrs = external 
+  ? { target: "_blank", rel: "noopener noreferrer" } 
+  : {};
+---
+
+<a 
+  href={href} 
+  class:list={["text-blue-600 transition-colors duration-200 hover:text-blue-800", classList]}
+  {...externalAttrs}
+  {...rest}
+>
+  <slot />
+</a>

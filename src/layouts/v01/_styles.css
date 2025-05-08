@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@theme inline {
+  /* dimensions layout width/ height */
+  --spacing-bar-height: calc(var(--spacing) * 12);
+  --spacing-main-width: var(--container-4xl);
+  /* dimensions layout padding/ margin */
+  --spacing-layout-padding: calc(var(--spacing) * 4);
+}
+
+.bar {
+  @apply h-bar-height w-full bg-white flex items-center border-gray-200;
+  @variant headr {
+    @apply border-b;
+  }
+  @variant footr {
+    @apply border-t;
+  }
+}
+
+.bar > div {
+  @apply max-w-main-width px-layout-padding w-full mx-auto flex justify-between items-center;
+}
+
+@custom-variant headr (&:where(header.bar));
+@custom-variant footr (&:where(footer.bar));

@@ -1,10 +1,10 @@
 ---
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
-import '@/styles/global.css';
+import Header from "@/layouts/v01/Header.astro";
+import Footer from "@/layouts/v01/Footer.astro";
+import "@/layouts/v01/_styles.css";
 
 interface Props {
-  title: string;
+	title: string;
 }
 
 const { title } = Astro.props;
@@ -20,19 +20,19 @@ const { title } = Astro.props;
 	</head>
 	<body class="bg-gray-50 min-h-screen flex flex-col">
 		<!-- Top Section: Header Component -->
-		<section id="top" class="w-full">
+		<section id="top">
 			<Header />
 		</section>
 
 		<!-- Center Section: Page-specific Content -->
-		<section id="center" class="w-full flex-1">
-			<div class="max-w-[900px] mx-auto px-4 py-6">
+		<section id="center" class="flex-grow">
+			<div class="max-w-main-width mx-auto p-layout-padding">
 				<slot />
 			</div>
 		</section>
 
 		<!-- Bottom Section: Footer Component -->
-		<section id="bottom" class="w-full mt-auto">
+		<section id="bottom">
 			<Footer />
 		</section>
 	</body>

@@ -6,22 +6,22 @@ const { post, Content } = Astro.props;
 const slug = Astro.params.slug || post.id;
 ---
 
-<article class="prose lg:prose-lg max-w-none">
-  <h1 class="text-3xl font-bold mb-4">{post.data.title}</h1>
+<article>
+  <h1>{post.data.title}</h1>
   <ViewCounter slug={slug} />
-  <div class="text-gray-500 mb-6">
+  <div>
     {post.data.pubDate &&
-      <time datetime={post.data.pubDate.toISOString()} class="text-sm">
+      <time datetime={post.data.pubDate.toISOString()}>
         {post.data.pubDate.toLocaleDateString()}
       </time>
     }
   </div>
 
   {post.data.description &&
-    <p class="text-lg text-gray-700 mb-8 italic">{post.data.description}</p>
+    <p>{post.data.description}</p>
   }
 
-  <div class="mt-6">
+  <div>
     <Content />
   </div>
 </article>

@@ -1,0 +1,32 @@
+---
+// Header component (shared across pages)
+import Search from "astro-pagefind/components/Search";
+import Link from "@/components/Link.astro";
+---
+
+<header class="bar">
+  <div>
+    <!-- Logo/Title Section -->
+    <div>
+      <h1 class="text-xl font-medium"><Link href="/">My Astro Blog</Link></h1>
+    </div>
+
+    <!-- Right Section: Social Links and Search -->
+    <div class="flex items-center gap-6">
+      <!-- Social Links -->
+      <div>
+        <Link href="https://github.com/yourusername" external title="GitHub" class="mr-4">
+          GitHub
+        </Link>
+        <Link href="https://twitter.com/yourusername" external title="Twitter">
+          Twitter
+        </Link>
+      </div>
+
+      <!-- Search Form -->
+      <div>
+        <Search id="search" uiOptions={{ showImages: false }} />
+      </div>
+    </div>
+  </div>
+</header>
