@@ -46,6 +46,13 @@ module.exports = {
         //     },
         //   ],
         // },
+        DEFAULT: {
+          css: [
+            {
+              maxWidth: '72ch',
+            },
+          ],
+        },
         //fontSize values copy from lg
         sm: {
           css: [
