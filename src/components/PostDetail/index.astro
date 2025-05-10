@@ -10,7 +10,7 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<aside id="d-left" class="absolute h-full -left-48 top-toc-top w-48 hidden md:block">
+<aside id="d-left" class="absolute h-full -left-48 top-top_toc w-48 hidden md:block">
   <TOC class="sticky top-20" headings={headings} />
 </aside>
 

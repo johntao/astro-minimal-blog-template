@@ -44,7 +44,7 @@ if (hasH1Headings) {
       </ul>
     </nav>
   ) : (
-    <p class="text-secondary-text italic">No table of contents available for this post.</p>
+    <p class="text-cl-text_weak italic">No table of contents available for this post.</p>
   )}
 </div>
 
@@ -80,11 +80,11 @@ if (hasH1Headings) {
         if (entry.isIntersecting) {
           // Remove active class from all links
           tocLinks.forEach(link => {
-            link.classList.remove('text-primary-link', 'font-medium');
+            link.classList.remove('text-cl-link_strong', 'font-medium');
           });
           
           // Add active class to current link
-          tocLink.classList.add('text-primary-link', 'font-medium');
+          tocLink.classList.add('text-cl-link_strong', 'font-medium');
         }
       });
     }, observerOptions);
@@ -132,7 +132,7 @@ if (hasH1Headings) {
   /* Minimal styling for the TOC */
   .toc-container {
     scrollbar-width: thin;
-    scrollbar-color: var(--colors-secondary-ui) transparent;
+    scrollbar-color: var(--colors-cl-ui_weak) transparent;
   }
   
   .toc-container::-webkit-scrollbar {
@@ -144,7 +144,7 @@ if (hasH1Headings) {
   }
   
   .toc-container::-webkit-scrollbar-thumb {
-    background-color: var(--colors-secondary-ui);
+    background-color: var(--colors-cl-ui_weak);
     border-radius: 4px;
   }
   

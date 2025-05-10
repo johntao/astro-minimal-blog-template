@@ -4,7 +4,7 @@ import EyeClosedIcon from "@/icons/svg/EyeClosedIcon.astro";
 ---
 <div
   x-data="{ isVisible: $persist(true) }"
-  class="border rounded-lg shadow-sm bg-primary-ui"
+  class="border rounded-lg shadow-sm bg-cl-ui_strong"
 >
   <div
     class="flex justify-between items-center cursor-pointer p-4"
@@ -13,7 +13,7 @@ import EyeClosedIcon from "@/icons/svg/EyeClosedIcon.astro";
     <h2 class="text-xl font-bold">About Me</h2>
     <button
       aria-label="Toggle about me section"
-      class="text-secondary-text cursor-pointer"
+      class="text-cl-text_weak cursor-pointer"
     >
       <!-- Eye Open Icon (when content is visible) -->
       <EyeOpenIcon x-show="isVisible" />

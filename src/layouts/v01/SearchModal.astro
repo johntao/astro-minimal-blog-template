@@ -9,8 +9,8 @@ interface Props {
 }
 
 const className = {
-  button1: 'flex cursor-pointer items-center justify-between rounded-lg border-1 border-primary-text bg-primary-bg px-2 py-1.5 w-full',
-  button2: 'flex cursor-pointer items-center justify-center rounded-full border-none bg-transparent hover:bg-primary-text/5 transition-colors p-2',
+  button1: 'flex cursor-pointer items-center justify-between rounded-lg border-1 border-cl-text_strong bg-cl-bg_strong px-2 py-1.5 w-full',
+  button2: 'flex cursor-pointer items-center justify-center rounded-full border-none bg-transparent hover:bg-cl-text_strong/5 transition-colors p-2',
 }
 
 ---
@@ -44,7 +44,7 @@ const className = {
     x-ref="modal"
     @click="checkClose"
     @keydown.escape="close"
-    class="border-none bg-primary-ui rounded-lg p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-primary-text/50 backdrop:backdrop-blur-sm mt-16 mx-auto overflow-hidden"
+    class="border-none bg-cl-ui_strong rounded-lg p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-cl-text_strong/50 backdrop:backdrop-blur-sm mt-16 mx-auto overflow-hidden"
   >
     <div x-ref="content" class="p-5 max-h-[calc(100vh-4rem)] overflow-y-auto">
       <div class="flex justify-between items-center mb-4">
