@@ -5,7 +5,7 @@
 @theme inline {
   /* dimensions layout width/ height */
   --spacing-bar-height: calc(var(--spacing) * 12);
-  --spacing-main-width: var(--container-5xl);
+  --spacing-main-width: var(--container-3xl);
   /* dimensions layout padding/ margin */
   --spacing-layout-padding: calc(var(--spacing) * 6);
   /* dimensions layout position */
@@ -48,12 +48,12 @@
   display: none !important;
 }
 
-.prose-sm h2>a::before {
+.prose h2>a::before {
   content: '# ';
 }
-.prose-sm h3>a::before {
+.prose h3>a::before {
   content: '## ';
 }
-.prose-sm h4>a::before {
+.prose h4>a::before {
   content: '### ';
 }

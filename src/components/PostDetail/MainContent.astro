@@ -16,9 +16,10 @@ const readingStats = readingTime(post.body ?? '');
 const readingMinutes = Math.ceil(readingStats.minutes);
 ---
 
-<article class="prose-sm mx-auto">
-  <h1 class="!mt-0 !mb-4 text-center font-bold tracking-tight">{post.data.title}</h1>
-  
+
+<h1 class="text-center font-bold text-4xl mt-0 mb-5">{post.data.title}</h1>
+<article class="prose prose-sm mx-auto">
+  <!-- <h1 class="text-center">{post.data.title}</h1> -->
   <div class="meta-line flex items-center gap-4 justify-center text-sm text-secondary-text mb-6">
     <ViewCounter slug={slug} />
     |
@@ -52,7 +53,7 @@ const readingMinutes = Math.ceil(readingStats.minutes);
   }
 </style>
 <script>
-  const articleEl = document.querySelector("article.prose-sm");
+  const articleEl = document.querySelector("article.prose");
   if (articleEl) {
     articleEl.addEventListener("click", async (event) => {
       const target = event.target as HTMLAnchorElement;

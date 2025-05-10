@@ -12,40 +12,13 @@ module.exports = {
   theme: {
     extend: {
       typography: () => ({
-        //fontSize values copy from base
-        // sm: {
-        //   css: [
-        //     {
-        //       fontSize: rem(16),
-        //       lineHeight: round(28 / 16),
-        //       h1: {
-        //         fontSize: em(36, 16),
-        //       },
-        //       h2: {
-        //         fontSize: em(24, 16),
-        //       },
-        //       h3: {
-        //         fontSize: em(20, 16),
-        //       },
-        //       code: {
-        //         fontSize: em(14, 16),
-        //       },
-        //       'h2 code': {
-        //         fontSize: em(21, 24),
-        //       },
-        //       'h3 code': {
-        //         fontSize: em(18, 20),
-        //       },
-        //       pre: {
-        //         fontSize: em(14, 16),
-        //         lineHeight: round(24 / 14),
-        //       },
-        //       table: {
-        //         fontSize: em(14, 16),
-        //       },
-        //     },
-        //   ],
-        // },
+        DEFAULT: {
+          css: [
+            {
+              maxWidth: '70ch',
+            },
+          ],
+        },
         //fontSize values copy from lg
         sm: {
           css: [
@@ -81,6 +54,40 @@ module.exports = {
             },
           ],
         },
+        //fontSize values copy from base
+        // sm: {
+        //   css: [
+        //     {
+        //       fontSize: rem(16),
+        //       lineHeight: round(28 / 16),
+        //       h1: {
+        //         fontSize: em(36, 16),
+        //       },
+        //       h2: {
+        //         fontSize: em(24, 16),
+        //       },
+        //       h3: {
+        //         fontSize: em(20, 16),
+        //       },
+        //       code: {
+        //         fontSize: em(14, 16),
+        //       },
+        //       'h2 code': {
+        //         fontSize: em(21, 24),
+        //       },
+        //       'h3 code': {
+        //         fontSize: em(18, 20),
+        //       },
+        //       pre: {
+        //         fontSize: em(14, 16),
+        //         lineHeight: round(24 / 14),
+        //       },
+        //       table: {
+        //         fontSize: em(14, 16),
+        //       },
+        //     },
+        //   ],
+        // },
       }),
     },
   },

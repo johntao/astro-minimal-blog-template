@@ -6,7 +6,7 @@ interface Props {
   class?: string;
 }
 
-const { ['x-show']: xShow, class: className = "", size } = Astro.props;
+const { ['x-show']: xShow, class: className = "", size = 24 } = Astro.props;
 ---
 
 <svg
