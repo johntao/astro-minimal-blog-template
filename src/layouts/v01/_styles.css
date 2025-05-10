@@ -21,7 +21,8 @@
 }
 @theme {
   --spacing-width_toc: 12rem;
-  --color-cl-bg_strong: #f8f7f2;
+  --color-cl-bg_strong: #efebe0;
+  /* --color-cl-bg_strong: #f8f7f2; */
 }
 
 .jt-bar {

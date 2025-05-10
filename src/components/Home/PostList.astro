@@ -11,12 +11,12 @@ const allPosts = (await getCollection("blog")).sort(
 
 <div class="py-8">
   <h2 class="text-2xl font-medium mb-6 border-b pb-2">All Blog Posts</h2>
-  <ul class="space-y-6 list-none">
+  <ul class="space-y-6">
     {
       allPosts.map((post) => (
-        <li class="border-l-2 transition-all border-cl-ui_weak hover:border-cl-link_strong bg-cl-ui_strong rounded-r">
-          <Link class="block pl-4 py-2" href={`/posts/${post.id}`}>
-            <div class="text-sm text-cl-text_weak mb-1">
+        <li class="border-l-2 border-cl-ui_weak hover:border-cl-link_strong bg-cl-ui_strong">
+          <Link class="block pl-4 py-2 space-y-1" href={`/posts/${post.id}`}>
+            <div class="text-sm text-cl-text_weak">
               <time
                 datetime={post.data.pubDate.toISOString()}
                 class="font-mono"
@@ -28,7 +28,7 @@ const allPosts = (await getCollection("blog")).sort(
                 })}
               </time>
             </div>
-            <h3 class="text-lg font-medium mb-1 text-cl-link_strong hover:underline">
+            <h3 class="text-lg font-medium text-cl-link_strong hover:underline">
               {post.data.title || "Untitled Post"}
             </h3>
             {post.data.description && (

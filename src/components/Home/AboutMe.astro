@@ -4,10 +4,10 @@ import EyeClosedIcon from "@/icons/svg/EyeClosedIcon.astro";
 ---
 <div
   x-data="{ isVisible: $persist(true) }"
-  class="border rounded-lg shadow-sm bg-cl-ui_strong"
+  class="border rounded-lg bg-cl-ui_strong p-4"
 >
   <div
-    class="flex justify-between cursor-pointer p-4"
+    class="flex justify-between cursor-pointer"
     @click="isVisible = !isVisible"
   >
     <h2 class="text-xl font-bold">About Me</h2>
@@ -23,7 +23,7 @@ import EyeClosedIcon from "@/icons/svg/EyeClosedIcon.astro";
   </div>
   <div
     x-show="isVisible"
-    class="space-y-3 p-4 pt-0"
+    class="space-y-3 mt-4"
   >
     <p>Hello! I'm a passionate blogger and developer who loves to share insights about technology, programming, and web development.</p>
     <p>This blog is my platform to document my journey, share what I've learned, and hopefully help others along the way.</p>
