@@ -9,14 +9,17 @@ interface Props {
 }
 
 const className = {
-  button1: 'flex cursor-pointer items-center justify-between rounded-lg border-1 border-cl-text_strong bg-cl-bg_strong px-2 py-1.5 w-full',
-  button2: 'flex cursor-pointer items-center justify-center rounded-full border-none bg-transparent hover:bg-cl-text_strong/5 transition-colors p-2',
-}
-
+  openSearch:
+    "flex justify-between rounded-lg border-1 border-cl-text_strong bg-cl-bg_strong px-2 py-1.5 w-full",
+  closeSearch:
+    "cursor-pointer rounded-full border-none bg-transparent hover:bg-cl-text_strong/5 transition-colors p-2",
+};
 ---
 
 <!-- Search Component with Alpine.js -->
-<div class={Astro.props.class} x-data="{
+<div
+  class={Astro.props.class}
+  x-data="{
   open() { $refs.modal.showModal() },
   close() { $refs.modal.close() },
   checkClose(e) { !this.$refs.content.contains(e.target) && this.close() },
@@ -26,15 +29,11 @@ const className = {
       this.open();
     }
   }
-}" 
+}"
   @keydown.window="handleKeydown"
 >
   <!-- Search Icon Button with centered layout and shortcut indicator -->
-  <button
-    @click="open"
-    aria-label="Open search"
-    class={className.button1}
-  >
+  <button @click="open" aria-label="Open search" class={className.openSearch}>
     <SearchIcon />
     <span class="">⌘ K</span>
   </button>
@@ -44,23 +43,21 @@ const className = {
     x-ref="modal"
     @click="checkClose"
     @keydown.escape="close"
-    class="border-none bg-cl-ui_strong rounded-lg p-0 max-w-2xl w-11/12 shadow-lg backdrop:bg-cl-text_strong/50 backdrop:backdrop-blur-sm mt-16 mx-auto overflow-hidden"
+    class="max-h-height_modal max-w-2xl w-11/12 my-margin_modal mx-auto border-none bg-cl-ui_strong rounded-lg backdrop:bg-cl-text_strong/50 backdrop:backdrop-blur-sm overflow-hidden"
   >
-    <div x-ref="content" class="p-5 max-h-[calc(100vh-4rem)] overflow-y-auto">
-      <div class="flex justify-between items-center mb-4">
+    <div x-ref="content" class="p-5 max-h-[inherit] overflow-y-auto">
+      <div class="flex justify-between mb-4">
         <h2 class="m-0 text-2xl">Search</h2>
         <button
           @click="close"
           tabindex="-1"
           aria-label="Close search"
-          class={className.button2}
+          class={className.closeSearch}
         >
           <CloseIcon />
         </button>
       </div>
-      <div>
-        <Search id="search" uiOptions={{ showImages: false }} />
-      </div>
+      <Search id="search" uiOptions={{ showImages: false }} />
     </div>
   </dialog>
 </div>

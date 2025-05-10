@@ -6,7 +6,9 @@
   /* dimensions layout width/ height */
   --spacing-height_bar: calc(var(--spacing) * 12);
   --spacing-width_main: var(--container-3xl);
+  --spacing-height_modal: calc(100vh - var(--spacing) * 32);
   /* dimensions layout padding/ margin */
+  --spacing-margin_modal: calc(var(--spacing) * 16);
   --spacing-padding_main: calc(var(--spacing) * 6);
   /* dimensions layout position */
   --spacing-top_toc: calc(var(--spacing) * (12 + 6));
@@ -18,31 +20,32 @@
   --color-cl-ui_weak: var(--color-gray-200);
 }
 @theme {
+  --spacing-width_toc: 12rem;
   --color-cl-bg_strong: #f8f7f2;
-  /* --color-soft-white: #f9f9f9;
-  --color-soft-black: #1a1a1a; */
-  /* --color-soft-white: #ff0000;
-  --color-soft-black: #00ff00; */
-  /* --color-soft-white: #f8f7f2;
-  --color-soft-black: #2d2d2d; */
 }
 
-.bar {
-  @apply h-height_bar w-full bg-cl-ui_strong/90 flex items-center border-cl-ui_weak;
-  @variant headr {
+.jt-bar {
+  @apply h-height_bar w-full bg-cl-ui_strong/90 flex border-cl-ui_weak;
+
+  header& {
     @apply border-b;
   }
-  @variant footr {
+  footer& {
     @apply border-t;
   }
 }
 
-.bar > div {
-  @apply max-w-width_main px-padding_main w-full mx-auto flex justify-between items-center;
+.jt-bar > .jt-bar-inner {
+  @apply max-w-width_main px-padding_main w-full mx-auto flex items-center;
+  /* &:where(header>*) {
+  } */
+  &:where(footer>*) {
+    @apply justify-between;
+  }
 }
 
-@custom-variant headr (&:where(header.bar));
-@custom-variant footr (&:where(footer.bar));
+/* @custom-variant jt-head (&:where(header>.jt-bar-inner));
+@custom-variant jt-foot (&:where(footer>.jt-bar-inner)); */
 
 [x-cloak] {
   display: none !important;

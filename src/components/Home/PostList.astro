@@ -16,7 +16,7 @@ const allPosts = (await getCollection("blog")).sort(
       allPosts.map((post) => (
         <li class="border-l-2 transition-all border-cl-ui_weak hover:border-cl-link_strong bg-cl-ui_strong rounded-r">
           <Link class="block pl-4 py-2" href={`/posts/${post.id}`}>
-            <div class="flex items-center text-sm text-cl-text_weak mb-1">
+            <div class="text-sm text-cl-text_weak mb-1">
               <time
                 datetime={post.data.pubDate.toISOString()}
                 class="font-mono"
