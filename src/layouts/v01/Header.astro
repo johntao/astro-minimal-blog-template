@@ -1,7 +1,10 @@
 ---
 // Header component (shared across pages)
 import Link from "@/components/Link.astro";
+import Link2 from "@/components/LinkHeadless.astro";
 import SearchModal from "@/layouts/v01/SearchModal.astro";
+import GitHubIcon from "@/icons/svg/GitHubIcon.astro";
+import TwitterIcon from "@/icons/svg/TwitterIcon.astro";
 ---
 
 <header id="site-header" class="bar fixed transition-transform duration-300 z-10">
@@ -17,18 +20,18 @@ import SearchModal from "@/layouts/v01/SearchModal.astro";
     <!-- Right Section: Social Links -->
     <div class="flex items-center gap-6">
       <!-- Social Links -->
-      <div>
-        <Link href="https://github.com/yourusername" external title="GitHub" class="mr-4">
-          GitHub
-        </Link>
-        <Link href="https://twitter.com/yourusername" external title="Twitter">
-          Twitter
-        </Link>
+      <div class="flex items-center">
+        <Link2 href="https://github.com/yourusername" external title="GitHub" class="mr-4">
+          <GitHubIcon size={20} />
+          <span class="sr-only">GitHub</span>
+        </Link2>
+        <Link2 href="https://twitter.com/yourusername" external title="Twitter">
+          <TwitterIcon size={20} />
+          <span class="sr-only">Twitter</span>
+        </Link2>
       </div>
     </div>
   </div>
-  
-  
 </header>
 
 <!-- Reading progress bar - Only visible on article pages -->
