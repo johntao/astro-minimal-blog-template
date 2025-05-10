@@ -10,17 +10,14 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<div class="flex flex-col md:flex-row gap-8 relative min-h-screen">
-  <!-- Left Section: TOC -->
-  <aside id="d-left" class="w-48 md:sticky top-toc-top h-fit">
-    <TOC headings={headings} />
-  </aside>
+<aside id="d-left" class="absolute h-full -left-48 top-toc-top w-48 hidden md:block">
+  <TOC class="sticky top-20" headings={headings} />
+</aside>
 
-  <!-- Center Section: Main Content -->
-  <section id="d-center" class="flex-1 min-w-0">
-    <MainContent post={post} Content={Content} />
-  </section>
-</div>
+<!-- Center Section: Main Content -->
+<section id="d-center" class="">
+  <MainContent post={post} Content={Content} />
+</section>
 <section class="mx-auto mt-12">
   <script is:inline
     src="https://giscus.app/client.js"
