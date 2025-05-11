@@ -83,7 +83,7 @@ import TwitterIcon from "@/icons/svg/TwitterIcon.astro";
     progressContainer.classList.remove("hidden");
     // Calculate and update the reading progress
     const updateReadingProgress = () => {
-      const article = document.getElementById("d-center");
+      const article = document.querySelector("main");
       if (!article) return;
       // Calculate how far down the page the user has scrolled
       const scrollTop = window.scrollY || document.documentElement.scrollTop;

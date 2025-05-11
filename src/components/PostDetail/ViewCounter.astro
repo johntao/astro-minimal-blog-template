@@ -1,48 +1,33 @@
 ---
-import EyeOpenIcon from '@/icons/svg/EyeOpenIcon.astro';
+import EyeOpenIcon from "@/icons/svg/EyeOpenIcon.astro";
 
 interface Props {
   slug: string;
+  svgClass?: string;
 }
 const { slug } = Astro.props;
 ---
-<div
-  title="View Count"
-  x-data={`viewCounter('${slug}')`}
->
-  <EyeOpenIcon size={16} />
-  <span x-show="loading" x-cloak>Loading...</span>
-  <span x-show="!loading && error" x-cloak x-bind:title="error">--</span>
-  <span x-show="!loading && !error" x-cloak x-text="views"></span>
-</div>
+
+<EyeOpenIcon class={Astro.props.svgClass} size={16} />
+<span x-data={`viewCounter('${slug}')`} x-text="views"></span>
 <script>
   import siteConfig from "@/site.config.ts";
-  window.Alpine.data('viewCounter', (slug: string) => ({
-    views: 0,
-    loading: true,
-    error: '',
+  window.Alpine.data("viewCounter", (slug: string) => ({
+    views: "--",
     async fetchViews() {
       try {
-        this.loading = true;
         const response = await fetch(`/api/views/${encodeURIComponent(slug)}`);
-        if (!response.ok) {
+        if (!response.ok)
           throw new Error(`Failed to fetch view count: ${response.statusText}`);
-        }
         const data = await response.json();
         this.views = data.count;
       } catch (err) {
-        this.error = err instanceof Error ? err.message : 'An error occurred';
-        console.error('Error fetching view count:', err);
-      } finally {
-        this.loading = false;
+        console.error("Error fetching view count:", err);
       }
     },
     init() {
-      if (siteConfig.isDemoSite) {
-        this.loading = false;
-      } else {
-        this.fetchViews();
-      }
-    }
+      if (siteConfig.isDemoSite) return;
+      this.fetchViews();
+    },
   }));
 </script>

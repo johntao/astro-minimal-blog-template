@@ -1,8 +1,8 @@
 ---
 // PostDetail component for the post page
 import { render, type CollectionEntry } from "astro:content";
-import TOC from './TOC.astro';
-import MainContent from './MainContent.astro';
+import TOC from "./TOC.astro";
+import MainContent from "./MainContent.astro";
 import Toast from "../Toast.astro";
 
 type Props = { post: CollectionEntry<"blog"> };
@@ -15,27 +15,26 @@ const { Content, headings } = await render(post);
 </aside>
 
 <!-- Center Section: Main Content -->
-<section id="d-center" class="">
-  <MainContent post={post} Content={Content} />
-</section>
+<MainContent post={post} Content={Content} />
 <section class="mt-12">
-  <script is:inline
+  <script
+    is:inline
     src="https://giscus.app/client.js"
-          data-repo="johntao/astro-minimal-blog-template"
-          data-repo-id="R_kgDOOmb6Vg"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOOmb6Vs4Cp6PG"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="bottom"
-          data-theme="light"
-          data-lang="en"
-          data-loading="lazy"
-          crossorigin="anonymous"
-          async>
-  </script>
+    data-repo="johntao/astro-minimal-blog-template"
+    data-repo-id="R_kgDOOmb6Vg"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOmb6Vs4Cp6PG"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="light"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async
+  ></script>
 </section>
 
 <Toast />
