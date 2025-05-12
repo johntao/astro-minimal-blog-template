@@ -14,44 +14,39 @@ const slug = Astro.params.slug || post.id;
 // Calculate reading time
 const readingStats = readingTime(post.body ?? '');
 const readingMinutes = Math.ceil(readingStats.minutes);
+
+const className = {
+  // h2: "text-2xl font-bold mt-8 mb-4",
+  // h3: "text-xl font-bold mt-6 mb-3",
+  // h4: "text-lg font-bold mt-5 mb-2",
+  svg: "inline align-text-bottom",
+};
 ---
 
 
-<h1 class="text-center font-bold text-4xl mt-0 mb-5">{post.data.title}</h1>
-<article class="prose prose-sm mx-auto">
-  <!-- <h1 class="text-center">{post.data.title}</h1> -->
-  <div class="meta-line flex items-center gap-4 justify-center text-sm text-secondary-text mb-6">
-    <ViewCounter slug={slug} />
+<article class="prose prose-sm mx-auto prose-headings:scroll-mt-top_toc prose-img:rounded-lg prose-a:underline-offset-2">
+  <h1 class="text-center mb-5">{post.data.title}</h1>
+  <div class="flex gap-4 justify-center text-sm text-cl-text_weak mb-6">
+    <div title="View Count">
+      <ViewCounter svgClass={className.svg} slug={slug} />
+    </div>
     |
-    {post.data.pubDate && (
-      <time title="Published Date" datetime={post.data.pubDate.toISOString()}>
-        <ClockIcon size={16} />
-        {post.data.pubDate.toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
-        })}
-      </time>
-    )}
+    <time title="Published Date" datetime={post.data.pubDate.toISOString()}>
+      <ClockIcon class={className.svg} size={16} />
+      {post.data.pubDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      })}
+    </time>
     |    
     <div title="Reading Time">
-      <BookIcon size={16} />
+      <BookIcon class={className.svg} size={16} />
       {readingMinutes} min read
     </div>
   </div>
-
-  <div class="prose-headings:scroll-mt-20 prose-a:underline-offset-2 prose-img:rounded-lg prose-img:shadow-md">
-    <Content />
-  </div>
+  <Content />
 </article>
-<style>
-  article {
-    .meta-line svg {
-      display: inline;
-      vertical-align: text-top;
-    }
-  }
-</style>
 <script>
   const articleEl = document.querySelector("article.prose");
   if (articleEl) {

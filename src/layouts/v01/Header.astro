@@ -7,117 +7,105 @@ import GitHubIcon from "@/icons/svg/GitHubIcon.astro";
 import TwitterIcon from "@/icons/svg/TwitterIcon.astro";
 ---
 
-<header id="site-header" class="bar fixed transition-transform duration-300 z-10">
-  <div class="flex justify-between items-center w-full">
+<header
+  id="site-header"
+  class="jt-bar fixed transition-transform duration-300 z-10"
+>
+  <div class="jt-bar-inner">
     <!-- Logo/Title Section -->
     <div class="flex-1">
-      <h1 class="text-xl font-medium"><Link href="/">My Astro Blog</Link></h1>
+      <h1 class="text-xl"><Link href="/">My Astro Blog</Link></h1>
     </div>
 
     <!-- Center Section: Search Icon and Modal -->
     <SearchModal class="flex-1" />
 
     <!-- Right Section: Social Links -->
-    <div class="flex-1 flex items-center gap-6 justify-end">
+    <div class="flex-1 flex justify-end space-x-4">
       <!-- Social Links -->
-      <div class="flex items-center">
-        <Link2 href="https://github.com/yourusername" external title="GitHub" class="mr-4">
-          <GitHubIcon size={20} />
-          <span class="sr-only">GitHub</span>
-        </Link2>
-        <Link2 href="https://twitter.com/yourusername" external title="Twitter">
-          <TwitterIcon size={20} />
-          <span class="sr-only">Twitter</span>
-        </Link2>
-      </div>
+      <Link2 href="https://github.com/yourusername" external title="GitHub">
+        <GitHubIcon size={20} />
+        <span class="sr-only">GitHub</span>
+      </Link2>
+      <Link2 href="https://twitter.com/yourusername" external title="Twitter">
+        <TwitterIcon size={20} />
+        <span class="sr-only">Twitter</span>
+      </Link2>
     </div>
   </div>
 </header>
 
 <!-- Reading progress bar - Only visible on article pages -->
-<div id="reading-progress-container" class="w-full h-1 bg-transparent hidden fixed z-20">
-  <div id="reading-progress-bar" class="h-full bg-primary-link w-0 transition-all duration-100"></div>
+<div id="reading-progress-container" class="w-full h-1 hidden fixed z-20">
+  <div id="reading-progress-bar" class="h-full bg-cl-link_strong"></div>
 </div>
 
 <!-- Add a spacer to prevent content from jumping when header becomes fixed -->
-<div class="h-bar-height"></div>
+<div class="h-height_bar"></div>
 
 <script>
-  // JavaScript to handle scroll behavior
-  let lastScrollY = window.scrollY;
-  const header = document.getElementById('site-header');
-  
-  // Make sure header exists before manipulating it
-  if (header) {
+  document.addEventListener("DOMContentLoaded", () => {
+    registerHidingHeader();
+    registerReadingProgress();
+  });
+  function registerHidingHeader() {
+    let lastScrollY = window.scrollY;
+    const header = document.getElementById("site-header");
+    // Make sure header exists before manipulating it
+    if (!header) return;
     // Initially position the header
-    if (window.scrollY === 0) {
-      header.style.transform = 'translateY(0)';
-    }
-    
-    window.addEventListener('scroll', () => {
+    if (window.scrollY === 0) header.style.transform = "translateY(0)";
+    window.addEventListener("scroll", () => {
       // Determine scroll direction
       const currentScrollY = window.scrollY;
-      
       if (currentScrollY <= 0) {
         // At the top of the page
-        header.style.transform = 'translateY(0)';
+        header.style.transform = "translateY(0)";
       } else if (currentScrollY < lastScrollY) {
         // Scrolling up - show header
-        header.style.transform = 'translateY(0)';
+        header.style.transform = "translateY(0)";
       } else {
         // Scrolling down - hide header
-        header.style.transform = 'translateY(-100%)';
+        header.style.transform = "translateY(-100%)";
       }
-      
       lastScrollY = currentScrollY;
     });
   }
-  
-  // Reading progress bar functionality
-  document.addEventListener('DOMContentLoaded', () => {
-    // Check if we're on a blog post page
-    const isPostPage = window.location.pathname.includes('/posts/');
-    
-    if (isPostPage) {
-      const progressContainer = document.getElementById('reading-progress-container');
-      const progressBar = document.getElementById('reading-progress-bar');
-      
-      if (progressContainer && progressBar) {
-        // Show the progress container on post pages
-        progressContainer.classList.remove('hidden');
-        
-        // Calculate and update the reading progress
-        const updateReadingProgress = () => {
-          const article = document.getElementById('d-center');
-          
-          if (article) {
-            // Calculate how far down the page the user has scrolled
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const articleHeight = article.offsetHeight;
-            const windowHeight = window.innerHeight;
-            
-            // Calculate reading progress percentage
-            // We subtract the window height to account for the visible portion
-            const scrollDistance = articleHeight - windowHeight;
-            let progress = (scrollTop / scrollDistance) * 100;
-            
-            // Clamp progress between 0 and 100
-            progress = Math.min(100, Math.max(0, progress));
-            
-            // Update the progress bar width
-            progressBar.style.width = `${progress}%`;
-          }
-        };
-        
-        // Initial calculation
-        updateReadingProgress();
-        
-        // Update on scroll
-        window.addEventListener('scroll', updateReadingProgress);
-        
-        // Update on window resize
-        window.addEventListener('resize', updateReadingProgress);
-      }
-    }
-  });
+  function registerReadingProgress() {
+    const isPostPage = window.location.pathname.includes("/posts/");
+    if (!isPostPage) return;
+    const progressContainer = document.getElementById(
+      "reading-progress-container",
+    );
+    const progressBar = document.getElementById("reading-progress-bar");
+    if (!progressContainer || !progressBar) return;
+    // Show the progress container on post pages
+    progressContainer.classList.remove("hidden");
+    // Calculate and update the reading progress
+    const updateReadingProgress = () => {
+      const article = document.querySelector("main");
+      if (!article) return;
+      // Calculate how far down the page the user has scrolled
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const articleHeight = article.offsetHeight;
+      const windowHeight = window.innerHeight;
+
+      // Calculate reading progress percentage
+      // We subtract the window height to account for the visible portion
+      const scrollDistance = articleHeight - windowHeight;
+      let progress = (scrollTop / scrollDistance) * 100;
+
+      // Clamp progress between 0 and 100
+      progress = Math.min(100, Math.max(0, progress));
+
+      // Update the progress bar width
+      progressBar.style.width = `${progress}%`;
+    };
+    // Initial calculation
+    updateReadingProgress();
+    // Update on scroll
+    window.addEventListener("scroll", updateReadingProgress);
+    // Update on window resize
+    window.addEventListener("resize", updateReadingProgress);
+  }
 </script>

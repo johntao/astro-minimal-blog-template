@@ -20,6 +20,7 @@ module.exports = {
           ],
         },
         //fontSize values copy from lg
+        //find a way to import default configs
         sm: {
           css: [
             {

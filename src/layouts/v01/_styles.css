@@ -4,45 +4,49 @@
 
 @theme inline {
   /* dimensions layout width/ height */
-  --spacing-bar-height: calc(var(--spacing) * 12);
-  --spacing-main-width: var(--container-3xl);
+  --spacing-height_bar: calc(var(--spacing) * 12);
+  --spacing-width_main: var(--container-3xl);
+  --spacing-height_modal: calc(100vh - var(--spacing) * 32);
   /* dimensions layout padding/ margin */
-  --spacing-layout-padding: calc(var(--spacing) * 6);
+  --spacing-margin_modal: calc(var(--spacing) * 16);
+  --spacing-padding_main: calc(var(--spacing) * 6);
   /* dimensions layout position */
-  --spacing-toc-top: calc(var(--spacing) * (12 + 6));
-  /* --color-primary-bg: var(--color-yellow-50); */
-  --color-primary-ui: var(--color-white);
-  --color-primary-link: var(--color-blue-500);
-  --color-primary-text: var(--color-gray-950);
-  --color-secondary-text: var(--color-gray-500);
-  --color-secondary-ui: var(--color-gray-200);
+  --spacing-top_toc: calc(var(--spacing) * (12 + 6));
+  /* --color-cl-bg_strong: var(--color-yellow-50); */
+  --color-cl-ui_strong: var(--color-white);
+  --color-cl-link_strong: var(--color-blue-500);
+  --color-cl-text_strong: var(--color-gray-950);
+  --color-cl-text_weak: var(--color-gray-500);
+  --color-cl-ui_weak: var(--color-gray-200);
 }
 @theme {
-  --color-primary-bg: #f8f7f2;
-  /* --color-soft-white: #f9f9f9;
-  --color-soft-black: #1a1a1a; */
-  /* --color-soft-white: #ff0000;
-  --color-soft-black: #00ff00; */
-  /* --color-soft-white: #f8f7f2;
-  --color-soft-black: #2d2d2d; */
+  --spacing-width_toc: 12rem;
+  --color-cl-bg_strong: #efebe0;
+  /* --color-cl-bg_strong: #f8f7f2; */
 }
 
-.bar {
-  @apply h-bar-height w-full bg-primary-ui/90 flex items-center border-secondary-ui;
-  @variant headr {
+.jt-bar {
+  @apply h-height_bar w-full bg-cl-ui_strong/90 flex border-cl-ui_weak;
+
+  header& {
     @apply border-b;
   }
-  @variant footr {
+  footer& {
     @apply border-t;
   }
 }
 
-.bar > div {
-  @apply max-w-main-width px-layout-padding w-full mx-auto flex justify-between items-center;
+.jt-bar > .jt-bar-inner {
+  @apply max-w-width_main px-padding_main w-full mx-auto flex items-center;
+  /* &:where(header>*) {
+  } */
+  &:where(footer>*) {
+    @apply justify-between;
+  }
 }
 
-@custom-variant headr (&:where(header.bar));
-@custom-variant footr (&:where(footer.bar));
+/* @custom-variant jt-head (&:where(header>.jt-bar-inner));
+@custom-variant jt-foot (&:where(footer>.jt-bar-inner)); */
 
 [x-cloak] {
   display: none !important;
