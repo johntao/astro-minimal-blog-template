@@ -43,18 +43,13 @@ if (hasH1Headings) {
   // Intersection Observer to highlight current heading in TOC
   document.addEventListener("DOMContentLoaded", () => {
     const _nav = document.querySelector("aside > nav")!;
-    const _navTop = _nav!.getBoundingClientRect().top;
+    const _navTop = _nav!.getBoundingClientRect().top + 8;
+    const _navBot = window.innerHeight - _navTop - 8;
     const _headings = [...document.querySelectorAll<HTMLHeadingElement>("article h2, article h3, article h4")]
-      .map(heading => {
-        const top = heading.getBoundingClientRect().top + window.scrollY - _navTop;
-        return [heading.id, { el: heading, top }] as const;
-      });
-    const rights = new Map<string, {el: HTMLHeadingElement, top: number}>(_headings);
+      .map(heading => [heading.id, heading] as const);
+    const rights = new Map<string, HTMLHeadingElement>(_headings);
     const _links = [..._nav.querySelectorAll<HTMLAnchorElement>("a")]
-      .map(link => {
-        registerSmoothScroll(link, rights);
-        return [link.dataset.slug!, link] as const;
-      });
+      .map(link => [link.dataset.slug!, link] as const);
     const lefts = new Map<string, HTMLAnchorElement>(_links);
     let currentActive: HTMLAnchorElement | undefined = undefined;
     const observer = new IntersectionObserver(entries => {
@@ -68,23 +63,10 @@ if (hasH1Headings) {
       link?.classList.add("text-cl-link_strong", "font-medium");
       currentActive = link;
     }, {
-      rootMargin: "-8% 0px -91% 0px", // a tiny 2% height viewport
+      rootMargin: `-${_navTop}px 0px -${_navBot}px 0px`, // a tiny 16px height viewport
       threshold: 0,
     });
-    rights.forEach(heading => observer.observe(heading.el));
-
-    function registerSmoothScroll(link: HTMLAnchorElement, rights: Map<string, {el: HTMLHeadingElement, top: number}>, ) {
-      link.addEventListener("click", function (e) {
-        const anchor = e.currentTarget as HTMLAnchorElement;
-        const id = anchor.dataset.slug!;
-        const right = rights.get(id);
-        if (!right) return;
-        e.preventDefault();
-        window.scrollTo({ top: right.top, behavior: "smooth" });
-        history.pushState(null, "", anchor.href);
-      });
-    }
-
+    rights.forEach(heading => observer.observe(heading));
   });
 
 </script>
