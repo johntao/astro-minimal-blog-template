@@ -1,16 +1,9 @@
 ---
 // Toast notification component that can be reused across different pages/components
-/*
-levels of toast:
-- it works
-- accept parameter, every one can pass the message
-- implement with Alpine.js
-- support multiple toasts
-- support differenet types of toasts (info, success, error)
-*/
+
 ---
 
-<div id="toast" class="fixed bottom-4 right-4 bg-cl-ui_strong px-4 py-2 rounded shadow-md opacity-0 transition-opacity duration-300 pointer-events-none z-50">
+<div id="toast" class="fixed bottom-4 right-4 bg-cl-ui_strong px-4 py-2 rounded opacity-0 transition-opacity duration-300 pointer-events-none z-50">
   Link Copied
 </div>
 
@@ -55,13 +48,6 @@ levels of toast:
         }
         this.timeout = null;
       }, 2000);
-    }
-  }
-
-  // Export the toast manager as a global variable
-  declare global {
-    interface Window {
-      showToast: (message?: string) => void;
     }
   }
 

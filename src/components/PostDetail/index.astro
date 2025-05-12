@@ -11,7 +11,9 @@ const { Content, headings } = await render(post);
 ---
 
 <aside class="absolute h-full -left-width_toc w-width_toc hidden md:block">
-  <TOC class="sticky top-top_toc" headings={headings} />
+  <nav class="sticky top-top_toc">
+    <TOC headings={headings} />
+  </nav>
 </aside>
 
 <!-- Center Section: Main Content -->
