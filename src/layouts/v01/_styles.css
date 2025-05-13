@@ -54,25 +54,24 @@
   display: none !important;
 }
 
-.prose h2::before {
-  content: 'h1# ';
+.prose h2>a::before {
+  content: 'h1#  ';
 }
-.prose h3::before {
-  content: 'h2# ';
+.prose h3>a::before {
+  content: 'h2#  ';
 }
-.prose h4::before {
-  content: 'h3# ';
+.prose h4>a::before {
+  content: 'h3#  ';
 }
 
 .prose h2, .prose h3, .prose h4 {
   position: relative;
 }
 
-.prose h2::before,
-.prose h3::before,
-.prose h4::before {
+.prose h2>a::before,
+.prose h3>a::before,
+.prose h4>a::before {
   font-weight: 700;
-  margin-right: 0.25rem;
 }
 
 .prose h2::after,

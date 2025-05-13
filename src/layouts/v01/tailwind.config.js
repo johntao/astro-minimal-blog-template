@@ -37,7 +37,10 @@ module.exports = {
                 marginBottom: em(12, 30),
                 lineHeight: round(24 / 30),
               },
-              h2: uniHeading,
+              h2: {
+                ...uniHeading,
+                marginTop: em(24, 24),
+              },
               h3: uniHeading,
               h4: uniHeading,
               code: {
