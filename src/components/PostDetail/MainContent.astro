@@ -21,10 +21,10 @@ const className = {
 ---
 
 <article
-  class="prose prose-sm mx-auto prose-headings:scroll-mt-top_toc prose-img:rounded-lg prose-a:underline-offset-2 prose-a:no-underline prose-a:hover:underline prose-a:hover:text-cl-link_strong"
+  class="prose prose-sm sm:prose-lg mx-auto prose-headings:scroll-mt-top_toc prose-img:rounded-lg prose-a:underline-offset-2 prose-a:no-underline prose-a:hover:underline prose-a:hover:text-cl-link_strong"
 >
   <h1 class="text-center mb-5">{post.data.title}</h1>
-  <div class="flex gap-4 justify-center text-sm text-cl-text_weak mb-6">
+  <div class="flex gap-4 justify-center text-sm text-cl-text_weak mb-2.5 sm:mb-6">
     <div title="View Count">
       <ViewCounter svgClass={className.svg} slug={slug} />
     </div>

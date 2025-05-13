@@ -19,24 +19,46 @@ const { Content, headings } = await render(post);
 <!-- Center Section: Main Content -->
 <MainContent post={post} Content={Content} />
 <section class="mt-12">
-  <script
-    is:inline
-    src="https://giscus.app/client.js"
-    data-repo="johntao/astro-minimal-blog-template"
-    data-repo-id="R_kgDOOmb6Vg"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOOmb6Vs4Cp6PG"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="light"
-    data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async
-  ></script>
+  <div id="comments-container" class="text-center py-8">
+    <button id="load-comments-btn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+      Load Comments
+    </button>
+  </div>
+  
+  <template id="giscus-template">
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="johntao/astro-minimal-blog-template"
+      data-repo-id="R_kgDOOmb6Vg"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOOmb6Vs4Cp6PG"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    ></script>
+  </template>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const loadCommentsBtn = document.getElementById('load-comments-btn');
+      const commentsContainer = document.getElementById('comments-container');
+      const giscusTemplate = document.getElementById('giscus-template') as HTMLTemplateElement;
+      if (loadCommentsBtn && commentsContainer && giscusTemplate) {
+        loadCommentsBtn.addEventListener('click', function() {
+          const giscusContent = giscusTemplate.content.cloneNode(true);
+          commentsContainer.innerHTML = '';
+          commentsContainer.appendChild(giscusContent);
+        });
+      }
+    });
+  </script>
 </section>
 
 <Toast />

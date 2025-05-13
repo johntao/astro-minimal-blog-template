@@ -9,12 +9,14 @@
   --spacing-height_modal: calc(100vh - var(--spacing) * 32);
   /* dimensions layout padding/ margin */
   --spacing-margin_modal: calc(var(--spacing) * 16);
-  --spacing-padding_main: calc(var(--spacing) * 6);
+  --spacing-padding_main_sm: calc(var(--spacing) * 3);
+  --spacing-padding_main_lg: calc(var(--spacing) * 6);
   /* dimensions layout position */
   --spacing-top_toc: calc(var(--spacing) * (12 + 6));
   /* --color-cl-bg_strong: var(--color-yellow-50); */
   --color-cl-ui_strong: var(--color-white);
   --color-cl-link_strong: var(--color-blue-500);
+  --color-cl-link_weak: var(--color-amber-700);
   --color-cl-text_strong: var(--color-gray-950);
   --color-cl-text_weak: var(--color-gray-500);
   --color-cl-ui_weak: var(--color-gray-200);
@@ -37,7 +39,7 @@
 }
 
 .jt-bar > .jt-bar-inner {
-  @apply max-w-width_main px-padding_main w-full mx-auto flex items-center;
+  @apply max-w-width_main px-padding_main_sm sm:px-padding_main_lg w-full mx-auto flex items-center;
   /* &:where(header>*) {
   } */
   &:where(footer>*) {
@@ -53,16 +55,13 @@
 }
 
 .prose h2::before {
-  content: '# ';
-  left: -1ch;
+  content: 'h1# ';
 }
 .prose h3::before {
-  content: '## ';
-  left: -2ch;
+  content: 'h2# ';
 }
 .prose h4::before {
-  content: '### ';
-  left: -3ch;
+  content: 'h3# ';
 }
 
 .prose h2, .prose h3, .prose h4 {
@@ -72,8 +71,8 @@
 .prose h2::before,
 .prose h3::before,
 .prose h4::before {
-  position: absolute;
-  margin-left: -0.5rem;
+  font-weight: 700;
+  margin-right: 0.25rem;
 }
 
 .prose h2::after,
