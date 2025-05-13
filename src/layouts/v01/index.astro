@@ -18,12 +18,16 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body class="bg-cl-bg_strong text-cl-text_strong min-h-screen flex flex-col">
+	<body class={`bg-cl-bg_strong text-cl-text_strong
+	min-h-screen
+	flex flex-col`}>
 		<!--  -->
 		<Header />
 
 		<!-- Center Section: Page-specific Content -->
-		<main class="w-full sm:w-width_main p-padding_main_sm sm:p-padding_main_lg flex-grow mx-auto relative">
+		<main class={`w-full sm:w-width_main
+		p-padding_main_sm sm:p-padding_main_lg
+		mx-auto flex-grow relative`}>
 			<slot />
 		</main>
 

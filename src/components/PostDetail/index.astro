@@ -10,7 +10,9 @@ const { post } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<aside class="absolute h-full -left-width_toc w-width_toc hidden md:block">
+<aside class={`absolute
+h-full -left-width_toc w-width_toc
+hidden md:block`}>
   <nav class="sticky top-top_toc pt-[5px]">
     <TOC headings={headings} />
   </nav>
@@ -20,7 +22,9 @@ const { Content, headings } = await render(post);
 <MainContent post={post} Content={Content} />
 <section class="mt-12">
   <div id="comments-container" class="text-center py-8">
-    <button id="load-comments-btn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors">
+    <button id="load-comments-btn" class={`px-4 py-2 rounded
+    bg-blue-500 text-white hover:bg-blue-600
+    transition-colors`}>
       Load Comments
     </button>
   </div>
