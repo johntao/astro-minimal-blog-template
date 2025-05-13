@@ -1,8 +1,7 @@
 ---
 // PostList component for displaying posts with view count, date, and title
 import { getCollection } from "astro:content";
-import Link from "../LinkHeadless.astro";
-// import ViewCounterRead from "./ViewCounterRead.astro";
+import Link from "@/components/LinkHeadless.astro";
 
 const allPosts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -10,7 +9,8 @@ const allPosts = (await getCollection("blog")).sort(
 ---
 
 <div class="py-8">
-  <h2 class="text-2xl font-medium mb-6 border-b pb-2">All Blog Posts</h2>
+  <h2 class={`text-2xl font-medium
+  mb-6 border-b pb-2`}>All Blog Posts</h2>
   <ul class="space-y-6">
     {
       allPosts.map((post) => (

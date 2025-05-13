@@ -1,17 +1,19 @@
 ---
 // PostDetail component for the post page
 import { render, type CollectionEntry } from "astro:content";
-import TOC from "./TOC.astro";
-import MainContent from "./MainContent.astro";
-import Toast from "../Toast.astro";
+import TOC from "@/components/PostDetail/TOC.astro";
+import MainContent from "@/components/PostDetail/MainContent.astro";
+import Toast from "@/components/Toast.astro";
 
 type Props = { post: CollectionEntry<"blog"> };
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
 ---
 
-<aside class="absolute h-full -left-width_toc w-width_toc hidden md:block">
-  <nav class="sticky top-top_toc">
+<aside class={`absolute
+h-full -left-width_toc w-width_toc
+hidden md:block`}>
+  <nav class="sticky top-top_toc pt-[5px]">
     <TOC headings={headings} />
   </nav>
 </aside>
@@ -19,24 +21,48 @@ const { Content, headings } = await render(post);
 <!-- Center Section: Main Content -->
 <MainContent post={post} Content={Content} />
 <section class="mt-12">
-  <script
-    is:inline
-    src="https://giscus.app/client.js"
-    data-repo="johntao/astro-minimal-blog-template"
-    data-repo-id="R_kgDOOmb6Vg"
-    data-category="Announcements"
-    data-category-id="DIC_kwDOOmb6Vs4Cp6PG"
-    data-mapping="pathname"
-    data-strict="0"
-    data-reactions-enabled="1"
-    data-emit-metadata="0"
-    data-input-position="bottom"
-    data-theme="light"
-    data-lang="en"
-    data-loading="lazy"
-    crossorigin="anonymous"
-    async
-  ></script>
+  <div id="comments-container" class="text-center py-8">
+    <button id="load-comments-btn" class={`px-4 py-2 rounded
+    bg-blue-500 text-white hover:bg-blue-600
+    transition-colors`}>
+      Load Comments
+    </button>
+  </div>
+  
+  <template id="giscus-template">
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="johntao/astro-minimal-blog-template"
+      data-repo-id="R_kgDOOmb6Vg"
+      data-category="Announcements"
+      data-category-id="DIC_kwDOOmb6Vs4Cp6PG"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light"
+      data-lang="en"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    ></script>
+  </template>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const loadCommentsBtn = document.getElementById('load-comments-btn');
+      const commentsContainer = document.getElementById('comments-container');
+      const giscusTemplate = document.getElementById('giscus-template') as HTMLTemplateElement;
+      if (loadCommentsBtn && commentsContainer && giscusTemplate) {
+        loadCommentsBtn.addEventListener('click', function() {
+          const giscusContent = giscusTemplate.content.cloneNode(true);
+          commentsContainer.innerHTML = '';
+          commentsContainer.appendChild(giscusContent);
+        });
+      }
+    });
+  </script>
 </section>
 
 <Toast />

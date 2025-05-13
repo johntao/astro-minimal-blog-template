@@ -12,17 +12,17 @@ import EyeClosedIcon from "@/icons/svg/EyeClosedIcon.astro";
   >
     <h2 class="text-xl font-bold">About Me</h2>
     <button
+      x-cloak
       aria-label="Toggle about me section"
       class="text-cl-text_weak cursor-pointer"
     >
-      <!-- Eye Open Icon (when content is visible) -->
       <EyeOpenIcon x-show="isVisible" />
-      <!-- Eye Closed Icon (when content is hidden) -->
       <EyeClosedIcon x-show="!isVisible" />
     </button>
   </div>
   <div
     x-show="isVisible"
+    x-cloak
     class="space-y-3 mt-4"
   >
     <p>Hello! I'm a passionate blogger and developer who loves to share insights about technology, programming, and web development.</p>

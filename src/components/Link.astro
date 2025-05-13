@@ -3,11 +3,11 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'a'> & { external?: boolean };
 
-const { 
-  href, 
-  external = false, 
+const {
+  href,
+  external = false,
   class: classList = "",
-  ...rest 
+  ...rest
 } = Astro.props;
 
 // const anchorUrl = href;
@@ -19,14 +19,16 @@ const {
 /* a[data-active="true"] {
   font-weight: 500;
   text-decoration: underline;
-} */
-const externalAttrs = external 
-  ? { target: "_blank", rel: "noopener noreferrer" } 
+}
+{["hover:underline", external ? 'text-cl-link_weak' : 'text-cl-link_strong', classList]}
+*/
+const externalAttrs = external
+  ? { target: "_blank", rel: "noopener noreferrer" }
   : {};
 ---
 
-<a 
-  href={href} 
+<a
+  href={href}
   class:list={["text-cl-link_strong hover:underline", classList]}
   {...externalAttrs}
   {...rest}

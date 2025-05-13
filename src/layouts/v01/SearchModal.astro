@@ -41,7 +41,10 @@ const className = {
     x-ref="modal"
     @click="checkClose"
     @keydown.escape="close"
-    class="max-h-height_modal max-w-2xl w-11/12 my-margin_modal mx-auto border-none bg-cl-ui_strong rounded-lg backdrop:bg-cl-text_strong/50 backdrop:backdrop-blur-sm overflow-hidden"
+    class=`max-h-height_modal max-w-2xl w-11/12
+    my-margin_modal mx-auto overflow-hidden
+    border-none bg-cl-ui_strong rounded-lg
+    backdrop:bg-cl-text_strong/50 backdrop:backdrop-blur-sm`
   >
     <div x-ref="content" class="p-5 max-h-[inherit] overflow-y-auto">
       <div class="flex justify-between mb-4">
