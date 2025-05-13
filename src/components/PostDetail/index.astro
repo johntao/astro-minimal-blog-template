@@ -1,9 +1,9 @@
 ---
 // PostDetail component for the post page
 import { render, type CollectionEntry } from "astro:content";
-import TOC from "./TOC.astro";
-import MainContent from "./MainContent.astro";
-import Toast from "../Toast.astro";
+import TOC from "@/components/PostDetail/TOC.astro";
+import MainContent from "@/components/PostDetail/MainContent.astro";
+import Toast from "@/components/Toast.astro";
 
 type Props = { post: CollectionEntry<"blog"> };
 const { post } = Astro.props;
