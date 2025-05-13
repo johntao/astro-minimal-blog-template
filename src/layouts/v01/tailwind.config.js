@@ -7,6 +7,13 @@ const round = (num) =>
 const rem = (px) => `${round(px / 16)}rem`;
 const em = (px, base) => `${round(px / base)}em`
 
+const uniHeading = {
+  fontSize: em(24, 18),
+  marginTop: em(40, 24),
+  marginBottom: em(16, 24),
+  lineHeight: round(36 / 24),
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   theme: {
@@ -30,12 +37,9 @@ module.exports = {
               h1: {
                 fontSize: em(48, 18),
               },
-              h2: {
-                fontSize: em(30, 18),
-              },
-              h3: {
-                fontSize: em(24, 18),
-              },
+              h2: uniHeading,
+              h3: uniHeading,
+              h4: uniHeading,
               code: {
                 fontSize: em(16, 18),
               },
@@ -55,40 +59,6 @@ module.exports = {
             },
           ],
         },
-        //fontSize values copy from base
-        // sm: {
-        //   css: [
-        //     {
-        //       fontSize: rem(16),
-        //       lineHeight: round(28 / 16),
-        //       h1: {
-        //         fontSize: em(36, 16),
-        //       },
-        //       h2: {
-        //         fontSize: em(24, 16),
-        //       },
-        //       h3: {
-        //         fontSize: em(20, 16),
-        //       },
-        //       code: {
-        //         fontSize: em(14, 16),
-        //       },
-        //       'h2 code': {
-        //         fontSize: em(21, 24),
-        //       },
-        //       'h3 code': {
-        //         fontSize: em(18, 20),
-        //       },
-        //       pre: {
-        //         fontSize: em(14, 16),
-        //         lineHeight: round(24 / 14),
-        //       },
-        //       table: {
-        //         fontSize: em(14, 16),
-        //       },
-        //     },
-        //   ],
-        // },
       }),
     },
   },

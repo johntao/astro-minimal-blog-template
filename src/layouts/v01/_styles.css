@@ -52,12 +52,34 @@
   display: none !important;
 }
 
-.prose h2>a::before {
+.prose h2::before {
   content: '# ';
+  left: -1ch;
 }
-.prose h3>a::before {
+.prose h3::before {
   content: '## ';
+  left: -2ch;
 }
-.prose h4>a::before {
+.prose h4::before {
   content: '### ';
+  left: -3ch;
+}
+
+.prose h2, .prose h3, .prose h4 {
+  position: relative;
+}
+
+.prose h2::before,
+.prose h3::before,
+.prose h4::before {
+  position: absolute;
+  margin-left: -0.5rem;
+}
+
+.prose h2::after,
+.prose h3::after,
+.prose h4::after {
+  content: '🔗';
+  margin-left: 0.75rem;
+  cursor: pointer;
 }

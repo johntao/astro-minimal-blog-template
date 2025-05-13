@@ -5,16 +5,13 @@ import BookIcon from "@/icons/svg/BookIcon.astro";
 import readingTime from "reading-time";
 import type { CollectionEntry } from "astro:content";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
-
 // MainContent component for the post detail center section
-type Props = { post: CollectionEntry<"blog"> , Content: AstroComponentFactory };
+type Props = { post: CollectionEntry<"blog">; Content: AstroComponentFactory };
 const { post, Content } = Astro.props;
 const slug = Astro.params.slug || post.id;
-
 // Calculate reading time
-const readingStats = readingTime(post.body ?? '');
+const readingStats = readingTime(post.body ?? "");
 const readingMinutes = Math.ceil(readingStats.minutes);
-
 const className = {
   // h2: "text-2xl font-bold mt-8 mb-4",
   // h3: "text-xl font-bold mt-6 mb-3",
@@ -23,8 +20,9 @@ const className = {
 };
 ---
 
-
-<article class="prose prose-sm mx-auto prose-headings:scroll-mt-top_toc prose-img:rounded-lg prose-a:underline-offset-2">
+<article
+  class="prose prose-sm mx-auto prose-headings:scroll-mt-top_toc prose-img:rounded-lg prose-a:underline-offset-2 prose-a:no-underline prose-a:hover:underline prose-a:hover:text-cl-link_strong"
+>
   <h1 class="text-center mb-5">{post.data.title}</h1>
   <div class="flex gap-4 justify-center text-sm text-cl-text_weak mb-6">
     <div title="View Count">
@@ -33,13 +31,15 @@ const className = {
     |
     <time title="Published Date" datetime={post.data.pubDate.toISOString()}>
       <ClockIcon class={className.svg} size={16} />
-      {post.data.pubDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      })}
+      {
+        post.data.pubDate.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })
+      }
     </time>
-    |    
+    |
     <div title="Reading Time">
       <BookIcon class={className.svg} size={16} />
       {readingMinutes} min read
@@ -48,25 +48,24 @@ const className = {
   <Content />
 </article>
 <script>
-  const articleEl = document.querySelector("article.prose");
-  if (articleEl) {
-    articleEl.addEventListener("click", async (event) => {
-      const target = event.target as HTMLAnchorElement;
-      if (!target) return;
-      switch (target.parentElement?.tagName) {
-        case 'H2':
-        case 'H3':
-        case 'H4':
-          break;
-        default:
-          return;
-      }
-      const link = target.href;
+  async function copyLink(e: Event): Promise<void> {
+    const clickOn = e.target as HTMLElement;
+    if (clickOn.tagName === "A") return;
+    e.preventDefault();
+    const registerOn = e.currentTarget as HTMLHeadingElement;
+    const anchor = registerOn.querySelector("a") as HTMLAnchorElement;
+    if (!anchor) return;
+    try {
+      const link = anchor.href;
       await navigator.clipboard.writeText(link);
-      console.log(`Copied to clipboard: ${link}`);
-      
-      // Use the global showToast function from the shared Toast component
       window.showToast("Link Copied");
-    });
+    } catch (err) {
+      console.error("Failed to copy link: ", err);
+      window.showToast("Failed to copy link");
+    }
   }
+  document
+    .querySelector("article.prose")
+    ?.querySelectorAll("h2, h3, h4")
+    .forEach(h => h.addEventListener("click", copyLink));
 </script>
