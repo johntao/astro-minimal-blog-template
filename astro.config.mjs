@@ -23,7 +23,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://stargazers.club',
+    //site: 'https://stargazers.club',
+    site: 'https://johntao.github.io',
+    base: '/astro-minimal-blog-template',
     build: {
         format: 'file',
     },
