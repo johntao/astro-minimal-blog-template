@@ -1,5 +1,10 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+    site: 'https://johntao.github.io',
+    base: '/astro-minimal-blog-template',
+    build: {
+        format: 'file',
+    },
+});
