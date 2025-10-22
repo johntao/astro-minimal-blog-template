@@ -20,6 +20,12 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
+
+      - name: Fetch blog content
+        run: |
+          git clone --depth 1 https://${{ secrets.CONTENT_REPO_TOKEN }}@github.com/johntao/blog-posts.git content
+          cp -r content/* src/content/
+
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # with:
@@ -39,3 +45,15 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+
+      # - name: Install and build
+      #   run: |
+      #     npm install
+      #     npm run build
+      #
+      # - name: Deploy
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./dist
