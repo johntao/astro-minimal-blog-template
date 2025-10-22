@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('ai-generated');
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+    <h2>All Posts</h2>
+
+    <h3>2025</h3>
+    <ul>
+      {posts.map(post => (
+        <li>
+          <strong>{post.data.pubDate.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' })}:</strong> <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+        </li>
+      ))}
+    </ul>
+	</body>
+</html>

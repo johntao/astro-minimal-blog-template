@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  return [...await getCollection('ai-generated')]
+    .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .map((entry, i, arr) => {
+      const nn = arr[i - 1];
+      const pp = arr[i + 1];
+      const next = nn && ({ slug: nn.slug, title: nn.data.title });
+      const prev = pp && ({ slug: pp.slug, title: pp.data.title });
+      return {
+        params: { slug: entry.slug },
+        props: { entry, next, prev },
+      };
+    });
+}
+
+const { entry, next, prev, } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await entry.render();
+
+const formattedDate = entry.data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>Astro</h1>
+  <article>
+    <h2>{entry.data.title}</h2>
+    <pre>AI-GENERATED
+est: {remarkPluginFrontmatter.minutesRead}
+pub: {formattedDate}</pre>
+    <hr>
+
+    <Content />
+  </article>
+
+  <hr>
+
+  <nav>
+    <p>Next: {next ?
+      <a href={`/posts/${next.slug}`}>{next.title}</a> :
+      <strong>You've reached the newest post</strong>}
+    </p>
+    <p>Prev: {prev ?
+      <a href={`/posts/${prev.slug}`}>{prev.title}</a> :
+      <strong>You've reached the oldest post</strong>}
+    </p>
+  </nav>
+	</body>
+</html>
